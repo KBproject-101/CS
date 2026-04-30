@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Feedback Loop — CS Playbook</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --purple:#101828; --purple-light:rgba(16,24,40,0.07);
+  --teal:#364153; --teal-light:rgba(54,65,83,0.07);
+  --amber:#F59E0B; --amber-light:#FFFBEB;
+  --red:#EF4444; --green:#10B981;
+  --g50:#f9fafb; --g100:#f3f4f6; --g200:#e5e7eb; --g300:#d1d5dc;
+  --g400:#99a1af; --g500:#6a7282; --g600:#4a5565; --g700:#364153;
+  --g800:#1f2937; --g900:#101828;
+  --sh:0 4px 6px rgba(0,0,0,.07),0 1px 3px rgba(0,0,0,.06);
+  --shm:0 10px 15px rgba(0,0,0,.07),0 4px 6px rgba(0,0,0,.05);
+  --shl:0 20px 25px rgba(0,0,0,.08),0 10px 10px rgba(0,0,0,.04);
+  --r:12px; --rs:8px; --rl:16px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;color:var(--g800);background:#fff;line-height:1.6}
+h2{font-size:clamp(1.4rem,3vw,2.1rem);font-weight:700;line-height:1.2}
+h3{font-size:1.2rem;font-weight:600}
+h4{font-size:.95rem;font-weight:600}
+p{color:var(--g600)}
+a{color:inherit;text-decoration:none}
+.container{max-width:1180px;margin:0 auto;padding:0 24px}
+section{padding:80px 0}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:1000;background:rgba(255,255,255,.96);backdrop-filter:blur(10px);border-bottom:1px solid var(--g200)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:60px;max-width:1180px;margin:0 auto;padding:0 24px}
+.nav-logo{font-weight:800;font-size:.95rem;color:var(--purple);display:flex;align-items:center;gap:8px}
+.logo-badge{background:var(--g900);color:#fff;padding:3px 8px;border-radius:6px;font-size:.72rem;font-weight:800;letter-spacing:.06em;line-height:1}
+.nav-links{display:flex;gap:2px;list-style:none;align-items:center}
+.nav-links a{font-size:.8125rem;font-weight:500;color:var(--g600);padding:6px 11px;border-radius:6px;transition:all .2s}
+.nav-links a:hover{background:var(--g100);color:var(--purple)}
+.nav-dropdown{position:relative;list-style:none}
+.nav-dropdown-btn{background:var(--g900);color:#fff;border:none;padding:6px 14px;border-radius:6px;font-size:.8125rem;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:5px;transition:background .2s;white-space:nowrap}
+.nav-dropdown-btn:hover{background:var(--g700)}
+.nav-dropdown-menu{display:none;position:absolute;top:calc(100% + 6px);right:0;background:#fff;border-radius:var(--r);box-shadow:var(--shl);border:1px solid var(--g200);min-width:190px;padding:6px;z-index:200}
+.nav-dropdown-menu a{display:block;padding:9px 14px;font-size:.8125rem;font-weight:500;color:var(--g700);border-radius:7px;transition:all .2s}
+.nav-dropdown-menu a:hover{background:var(--g50);color:var(--purple)}
+.nav-dropdown-menu a.active{background:var(--purple-light);color:var(--purple);font-weight:700}
+.nav-dropdown.open .nav-dropdown-menu{display:block}
+.hamburger{display:none;background:none;border:none;cursor:pointer;font-size:1.4rem;color:var(--g700)}
+.mobile-menu{display:none;flex-direction:column;gap:4px;padding:12px 24px 16px;border-bottom:1px solid var(--g200);background:#fff}
+.mobile-menu a{font-size:.9rem;font-weight:500;color:var(--g700);padding:10px 0;border-bottom:1px solid var(--g100)}
+.mobile-menu .mobile-sub a{padding:8px 0;font-size:.85rem;color:var(--g500);border-bottom:none;padding-left:12px}
+.mobile-menu.open{display:flex}
+
+/* SHARED */
+.section-lbl{display:inline-block;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;padding:4px 12px;border-radius:100px;margin-bottom:10px}
+.lbl-teal{color:var(--teal);background:var(--teal-light)}
+.section-head{text-align:center;max-width:680px;margin:0 auto 52px}
+.section-head h2{color:var(--g900);margin-bottom:10px}
+.section-head p{font-size:.9875rem;color:var(--g500)}
+.card{background:#fff;border-radius:var(--r);box-shadow:var(--sh);padding:26px;border:1px solid var(--g100);transition:all .3s}
+.card:hover{box-shadow:var(--shm);transform:translateY(-2px)}
+.g2{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
+.badge{display:inline-block;padding:3px 10px;border-radius:100px;font-size:.7rem;font-weight:700}
+.b-amber{background:#FEF3C7;color:#92400E}
+.b-green{background:#D1FAE5;color:#065F46}
+.b-teal{background:var(--teal-light);color:var(--teal)}
+.key-takeaway{background:linear-gradient(135deg,rgba(16,24,40,.04),rgba(54,65,83,.04));border:1.5px solid rgba(16,24,40,.12);border-radius:var(--r);padding:20px 24px;margin-top:40px;display:flex;align-items:flex-start;gap:12px}
+.kt-icon{font-size:1.4rem;flex-shrink:0;line-height:1.4}
+.kt-body h4{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--purple);margin-bottom:4px}
+.kt-body p{font-size:.9375rem;color:var(--g700);line-height:1.65}
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.cklist{list-style:none;padding:0}
+.cklist li{display:flex;align-items:flex-start;gap:9px;padding:5px 0;font-size:.84rem;color:var(--g700)}
+.cklist li::before{content:'';display:inline-block;width:10px;height:10px;border:1.5px solid var(--purple);border-radius:2px;flex-shrink:0;margin-top:4px}
+.quote-block{background:rgba(16,24,40,.04);border-left:3px solid var(--purple);padding:11px 14px;border-radius:0 7px 7px 0;font-size:.82rem;color:var(--g600);font-style:italic;margin-top:9px;line-height:1.7}
+.tpl-box{background:var(--g50);border-radius:var(--rs);padding:18px;margin-top:14px;font-size:.84rem;line-height:1.8}
+.tpl-box h5{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--g400);margin-bottom:10px}
+.tpl-box p{color:var(--g700)}
+
+/* FEEDBACK SPECIFIC */
+#feedback{background:var(--g50)}
+.flow-row{display:flex;align-items:center;justify-content:center;gap:6px;flex-wrap:wrap;margin:28px 0}
+.flow-node{background:#fff;border:1.5px solid var(--g200);border-radius:var(--r);padding:14px 18px;text-align:center;font-size:.82rem;font-weight:500;min-width:130px}
+.flow-node.center{background:var(--purple);color:#fff;border-color:var(--purple);font-weight:700}
+.flow-arrow{color:var(--g300);font-size:1.4rem}
+.intake-form{background:#fff;border-radius:var(--rl);padding:28px;box-shadow:var(--sh);border:1px solid var(--g100)}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+.fg{display:flex;flex-direction:column;gap:5px}
+.fg label{font-size:.78rem;font-weight:600;color:var(--g700)}
+.fg input,.fg select,.fg textarea{border:1.5px solid var(--g200);border-radius:7px;padding:9px 13px;font-size:.84rem;font-family:'Inter',sans-serif;color:var(--g800);outline:none;transition:border-color .2s;background:#fff}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--purple);box-shadow:0 0 0 3px rgba(16,24,40,.1)}
+.fg textarea{resize:vertical;min-height:80px}
+.submit-btn{margin-top:4px;padding:11px 24px;background:var(--purple);color:#fff;border:none;border-radius:8px;font-size:.875rem;font-weight:600;cursor:pointer;transition:all .2s}
+.submit-btn:hover{background:#1f2937}
+.prio-wrap{background:#fff;border-radius:var(--rl);box-shadow:var(--shm);overflow:hidden;border:1px solid var(--g100)}
+.prio-head{background:var(--g900);color:#fff;padding:18px 26px}
+.prio-head h3{color:#fff;font-size:1rem}
+.prio-head p{color:#94A3B8;font-size:.82rem;margin-top:3px}
+.prio-body{display:grid;grid-template-columns:1fr 260px}
+.prio-inputs{padding:26px}
+.prio-out{background:var(--g50);padding:26px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;border-left:1px solid var(--g100)}
+.prio-score{font-size:3rem;font-weight:900;color:var(--purple);line-height:1}
+.prio-rec{font-size:1.05rem;font-weight:700;text-align:center}
+.prio-rdesc{font-size:.78rem;color:var(--g500);text-align:center;line-height:1.55}
+.ni{display:flex;flex-direction:column;gap:5px;margin-bottom:18px}
+.ni label{font-size:.84rem;font-weight:500;color:var(--g700)}
+.ni input{border:1.5px solid var(--g200);border-radius:7px;padding:9px 13px;font-size:.84rem;font-family:'Inter',sans-serif;outline:none;width:100%;transition:border-color .2s}
+.ni input:focus{border-color:var(--purple);box-shadow:0 0 0 3px rgba(16,24,40,.1)}
+.effort-row{display:flex;gap:7px}
+.eff-btn{flex:1;padding:8px;border:1.5px solid var(--g200);border-radius:7px;background:#fff;font-size:.84rem;font-weight:600;cursor:pointer;transition:all .2s;color:var(--g600)}
+.eff-btn.sel{border-color:var(--purple);background:var(--purple-light);color:var(--purple)}
+
+@media(max-width:768px){
+  .g2{grid-template-columns:1fr}
+  .hamburger{display:block}
+  .nav-links{display:none}
+  .prio-body{grid-template-columns:1fr}
+  .form-row{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a class="nav-logo" href="index.html"><span class="logo-badge">CS</span> Playbook</a>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="index.html#foundation">Foundation</a></li>
+      <li><a href="index.html#current">Startup Phase</a></li>
+      <li><a href="index.html#transition">Scaling Up</a></li>
+      <li><a href="index.html#ai-future">AI Future</a></li>
+      <li class="nav-dropdown">
+        <button class="nav-dropdown-btn" onclick="toggleDropdown()">Workflow &amp; Resources <svg width="9" height="5" viewBox="0 0 9 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:middle;margin-left:1px"><polyline points="1,1 4.5,4 8,1"/></svg></button>
+        <div class="nav-dropdown-menu">
+          <a href="onboarding.html">Onboarding</a>
+          <a href="playbooks.html">Playbooks</a>
+          <a href="feedback.html" class="active">Feedback Loop</a>
+        </div>
+      </li>
+    </ul>
+    <button class="hamburger" id="hamburger" onclick="toggleMobile()"><svg width="18" height="13" viewBox="0 0 18 13" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="0" y1="1" x2="18" y2="1"/><line x1="0" y1="6.5" x2="18" y2="6.5"/><line x1="0" y1="12" x2="18" y2="12"/></svg></button>
+  </div>
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="index.html#foundation" onclick="toggleMobile()">Foundation</a>
+    <a href="index.html#current" onclick="toggleMobile()">Startup Phase</a>
+    <a href="index.html#transition" onclick="toggleMobile()">Scaling Up</a>
+    <a href="index.html#ai-future" onclick="toggleMobile()">AI Future</a>
+    <div class="mobile-sub" style="padding-left:12px;border-left:2px solid var(--g200);margin:2px 0;display:flex;flex-direction:column">
+      <a href="onboarding.html" onclick="toggleMobile()">› Onboarding</a>
+      <a href="playbooks.html" onclick="toggleMobile()">› Playbooks</a>
+      <a href="feedback.html" onclick="toggleMobile()" style="color:var(--purple);font-weight:700">› Feedback Loop</a>
+    </div>
+  </div>
+</nav>
+
+<!-- FEEDBACK LOOP -->
+<section id="feedback">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="section-lbl lbl-teal">CS × Product</span>
+      <h2>The Feedback Loop</h2>
+      <p>Customer feedback is only valuable if it reaches product in a form they can act on. Build the system, not just the intention.</p>
+    </div>
+
+    <div class="reveal" style="margin-bottom:48px">
+      <h3 style="margin-bottom:8px;color:var(--g900)">Step 1 — Capture: All the Places Feedback Lives</h3>
+      <div class="flow-row">
+        <div class="flow-node">Support<br>Tickets</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-node">NPS<br>Responses</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-node">QBR<br>Notes</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-node center">VoC<br>Repository</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-node">Churn<br>Interviews</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-node">Feature<br>Requests</div>
+      </div>
+      <div class="intake-form">
+        <h4 style="margin-bottom:6px">Feedback Intake Form</h4>
+        <p style="font-size:.82rem;color:var(--g500);margin-bottom:20px">Standardize how your team logs customer input. One form, everyone uses it.</p>
+        <div class="form-row">
+          <div class="fg"><label>Customer Name</label><input type="text" placeholder="e.g. Acme Corp — Sarah Chen"></div>
+          <div class="fg"><label>Segment</label><select><option>SMB (0–50 employees)</option><option>Mid-Market (51–500)</option><option>Enterprise (500+)</option></select></div>
+        </div>
+        <div class="form-row">
+          <div class="fg"><label>Feedback Type</label><select><option>Feature Request</option><option>Bug Report</option><option>Process Friction</option><option>Pricing Concern</option><option>Competitor Mention</option></select></div>
+          <div class="fg"><label>Customer ARR ($)</label><input type="text" placeholder="e.g. 24000"></div>
+        </div>
+        <div class="form-row">
+          <div class="fg"><label>Impact Score (1–5)</label><select><option>5 — Blocking adoption or renewal</option><option>4 — Significant friction, workaround exists</option><option>3 — Nice to have, moderate impact</option><option>2 — Low impact, rarely mentioned</option><option>1 — Cosmetic or one-off</option></select></div>
+          <div class="fg"><label>How many customers have mentioned this?</label><input type="number" placeholder="e.g. 7" min="1"></div>
+        </div>
+        <div class="fg" style="margin-bottom:14px"><label>Description (what the customer said, in their words)</label><textarea placeholder='e.g. "We spend 2 hours per week manually exporting reports to share with leadership. If this was automated, we&apos;d expand to 3 more teams immediately."'></textarea></div>
+        <div class="fg" style="margin-bottom:20px"><label>CSM Notes (context, workaround used, urgency)</label><textarea placeholder="e.g. This came up in the QBR. Sarah is the champion but her VP is the one blocking renewal over this issue. High-priority."></textarea></div>
+        <button class="submit-btn" onclick="alert('In production, this logs to your VoC repository in Notion or your CS platform. For now — great habit!')">Log Feedback</button>
+      </div>
+    </div>
+
+    <div class="reveal" style="margin-bottom:48px">
+      <h3 style="margin-bottom:8px;color:var(--g900)">Step 2 — Triage: Prioritization Calculator</h3>
+      <p style="font-size:.9rem;color:var(--g500);margin-bottom:20px">Not everything should be built. Use this to make the case (or not) for any given request.</p>
+      <div class="prio-wrap">
+        <div class="prio-head">
+          <h3>Feature Prioritization Calculator</h3>
+          <p>Priority Score = (Customer Count × Avg ARR) ÷ Effort Multiplier × Impact</p>
+        </div>
+        <div class="prio-body">
+          <div class="prio-inputs">
+            <div class="ni"><label>Number of customers requesting this</label><input type="number" id="p-count" value="8" min="1" oninput="calcPrio()"></div>
+            <div class="ni"><label>Average ARR of those customers ($)</label><input type="number" id="p-arr" value="18000" min="0" oninput="calcPrio()"></div>
+            <div class="ni"><label>Impact score (1–5 — how much does it unblock them?)</label><input type="number" id="p-impact" value="4" min="1" max="5" oninput="calcPrio()"></div>
+            <div class="ni">
+              <label>Estimated engineering effort</label>
+              <div class="effort-row">
+                <button class="eff-btn" id="eff-S" onclick="setEffort('S')">S</button>
+                <button class="eff-btn sel" id="eff-M" onclick="setEffort('M')">M</button>
+                <button class="eff-btn" id="eff-L" onclick="setEffort('L')">L</button>
+                <button class="eff-btn" id="eff-XL" onclick="setEffort('XL')">XL</button>
+              </div>
+            </div>
+          </div>
+          <div class="prio-out">
+            <div class="prio-score" id="prio-score">576</div>
+            <div class="prio-rec" id="prio-rec" style="color:var(--purple)">Build Now</div>
+            <div class="prio-rdesc" id="prio-rdesc">Strong signal from high-value customers. Bring to next CS × Product sync with a brief.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="reveal" style="margin-bottom:48px">
+      <h3 style="margin-bottom:16px;color:var(--g900)">Step 3 — Routing: CS × Product Sync</h3>
+      <div class="g2">
+        <div class="card">
+          <h4 style="margin-bottom:12px">Monthly CS × Product Agenda (45 min)</h4>
+          <p style="font-size:.84rem;line-height:1.9;color:var(--g700)">
+            <strong>0–5:</strong> Wins — features that shipped and customer reactions<br>
+            <strong>5–15:</strong> Top 5 feedback items from this month (pre-prioritized with the calculator)<br>
+            <strong>15–25:</strong> Deep dive on 1–2 high-priority items. CSM presents the customer brief.<br>
+            <strong>25–35:</strong> Product shares roadmap context — what's coming, what's not and why<br>
+            <strong>35–40:</strong> What does CS need to know to set expectations with customers?<br>
+            <strong>40–45:</strong> Close loop — who asks about X when it ships?
+          </p>
+        </div>
+        <div class="card">
+          <h4 style="margin-bottom:6px">What NOT to bring to Product</h4>
+          <ul class="cklist" style="margin-top:10px">
+            <li>Cosmetic requests one customer mentioned once</li>
+            <li>Features that already exist (send to #help channel first)</li>
+            <li>Vague asks like "customers want better reporting" — quantify it</li>
+            <li>Personal preferences disguised as customer feedback</li>
+            <li>Competitive features without a retention risk attached</li>
+          </ul>
+          <div class="quote-block">"Seven customers, averaging $22K ARR each, mentioned they can't do X. Two have tied renewal to it. Here's the use case and a workaround we're using today."<br><br>This is what a good product brief sounds like.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="reveal">
+      <h3 style="margin-bottom:16px;color:var(--g900)">Step 4 — Closed Loop: Telling Customers When It Ships</h3>
+      <div class="card">
+        <h4 style="margin-bottom:12px">Template: Feature shipped — notifying the customers who asked</h4>
+        <div class="tpl-box">
+          <h5>Email template</h5>
+          <p><strong>Subject:</strong> That thing you asked for? It's live.<br><br>
+          Hi Sarah,<br><br>
+          Quick one — a few months ago you mentioned that manually exporting reports was costing your team ~2 hours per week. You're not alone: 9 other customers told us the same thing.<br><br>
+          I'm happy to tell you: automated report scheduling just shipped. You can set it up in Settings → Reports → Schedule. Takes about 3 minutes.<br><br>
+          I wanted to personally let you know because you helped us understand why it mattered. If you run into any issues getting it set up, just reply here.<br><br>
+          Thanks for the feedback — genuinely.<br>
+          Marcus, your CSM</p>
+        </div>
+        <p style="font-size:.82rem;color:var(--g500);margin-top:14px">After sending: log the interaction as "influenced revenue" if the feature contributed to a renewal or expansion. Track this monthly and share with leadership.</p>
+      </div>
+    </div>
+
+    <div class="key-takeaway reveal"><span class="kt-icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="10,2 18,10 10,18 2,10"/></svg></span><div class="kt-body"><h4>Key Takeaway</h4><p>The feedback loop only works if it's closed. If customers tell you what they need and never hear back — not even when it ships — they stop telling you. The "thank you, it's live" email is one of the highest-ROI things a CSM can send.</p></div></div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer style="background:var(--g900);color:#fff;padding:48px 0 32px">
+  <div class="container">
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin-bottom:36px">
+      <div>
+        <div style="font-weight:800;font-size:1.1rem;color:#fff;margin-bottom:10px"><span class="logo-badge">CS</span> Playbook</div>
+        <p style="font-size:.84rem;color:#94A3B8;line-height:1.7">A practitioner-built guide to customer success — from the messy startup phase to the AI-powered future.</p>
+      </div>
+      <div>
+        <div style="font-weight:700;font-size:.84rem;color:#94A3B8;text-transform:uppercase;letter-spacing:.08em;margin-bottom:14px">Main Guide</div>
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <a href="index.html#foundation" style="color:#CBD5E1;font-size:.84rem" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#CBD5E1'">The Foundation</a>
+          <a href="index.html#current" style="color:#CBD5E1;font-size:.84rem" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#CBD5E1'">Startup Phase</a>
+          <a href="index.html#transition" style="color:#CBD5E1;font-size:.84rem" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#CBD5E1'">Scaling Up</a>
+          <a href="index.html#ai-future" style="color:#CBD5E1;font-size:.84rem" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#CBD5E1'">AI Future</a>
+        </div>
+      </div>
+      <div>
+        <div style="font-weight:700;font-size:.84rem;color:#94A3B8;text-transform:uppercase;letter-spacing:.08em;margin-bottom:14px">Workflow &amp; Resources</div>
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <a href="onboarding.html" style="color:#CBD5E1;font-size:.84rem" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#CBD5E1'">Onboarding</a>
+          <a href="playbooks.html" style="color:#CBD5E1;font-size:.84rem" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#CBD5E1'">Playbooks</a>
+          <a href="feedback.html" style="color:#fff;font-size:.84rem;font-weight:600">Feedback Loop</a>
+        </div>
+      </div>
+    </div>
+    <div style="border-top:1px solid #1F2937;padding-top:20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
+      <p style="color:#4B5563;font-size:.8rem">Built for CS practitioners. Use it, adapt it, share it.</p>
+      <a href="index.html" style="color:#94A3B8;font-size:.84rem;font-weight:600">← Back to main guide</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+function toggleMobile() {
+  document.getElementById('mobile-menu').classList.toggle('open');
+}
+function toggleDropdown() {
+  document.querySelector('.nav-dropdown').classList.toggle('open');
+}
+document.addEventListener('click', function(e) {
+  if (!e.target.closest('.nav-dropdown')) {
+    var d = document.querySelector('.nav-dropdown');
+    if (d) d.classList.remove('open');
+  }
+});
+
+var _effort = 'M';
+function setEffort(e) {
+  _effort = e;
+  ['S','M','L','XL'].forEach(function(x) {
+    document.getElementById('eff-' + x).classList.toggle('sel', x === e);
+  });
+  calcPrio();
+}
+function calcPrio() {
+  var count   = Math.max(1, parseInt(document.getElementById('p-count').value) || 1);
+  var arr     = Math.max(0, parseInt(document.getElementById('p-arr').value) || 0);
+  var impact  = Math.min(5, Math.max(1, parseInt(document.getElementById('p-impact').value) || 1));
+  var effortM = { S:1, M:2, L:4, XL:8 }[_effort] || 2;
+  var score   = Math.min(999, Math.round((count * arr * impact) / (effortM * 1000)));
+  document.getElementById('prio-score').textContent = score;
+  var rec, desc, col;
+  if (score >= 300)      { rec='Build Now';           desc='Strong signal from high-value customers. Bring to next CS × Product sync with a written brief.'; col='var(--purple)'; }
+  else if (score >= 100) { rec='Backlog';             desc='Meaningful signal but not urgent. Document it, monitor frequency, revisit next quarter.'; col='var(--teal)'; }
+  else if (score >= 30)  { rec='Find a Workaround';  desc='Low priority to build. Find a workaround customers can use today and document it.'; col='var(--amber)'; }
+  else                   { rec='Decline';             desc='Insufficient signal or too narrow. Do not bring this to product. Respond to the customer directly.'; col='var(--red)'; }
+  document.getElementById('prio-rec').textContent = rec;
+  document.getElementById('prio-rec').style.color = col;
+  document.getElementById('prio-rdesc').textContent = desc;
+}
+
+(function() {
+  if (!window.IntersectionObserver) return;
+  var obs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(function(el) { obs.observe(el); });
+})();
+
+document.addEventListener('DOMContentLoaded', function() { calcPrio(); });
+</script>
+</body>
+</html>

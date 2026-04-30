@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Playbook Library — CS Playbook</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --purple:#101828; --purple-light:rgba(16,24,40,0.07);
+  --teal:#364153; --teal-light:rgba(54,65,83,0.07);
+  --amber:#F59E0B; --amber-light:#FFFBEB;
+  --red:#EF4444; --green:#10B981;
+  --g50:#f9fafb; --g100:#f3f4f6; --g200:#e5e7eb; --g300:#d1d5dc;
+  --g400:#99a1af; --g500:#6a7282; --g600:#4a5565; --g700:#364153;
+  --g800:#1f2937; --g900:#101828;
+  --sh:0 4px 6px rgba(0,0,0,.07),0 1px 3px rgba(0,0,0,.06);
+  --shm:0 10px 15px rgba(0,0,0,.07),0 4px 6px rgba(0,0,0,.05);
+  --shl:0 20px 25px rgba(0,0,0,.08),0 10px 10px rgba(0,0,0,.04);
+  --r:12px; --rs:8px; --rl:16px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;color:var(--g800);background:#fff;line-height:1.6}
+h2{font-size:clamp(1.4rem,3vw,2.1rem);font-weight:700;line-height:1.2}
+h3{font-size:1.2rem;font-weight:600}
+h4{font-size:.95rem;font-weight:600}
+p{color:var(--g600)}
+a{color:inherit;text-decoration:none}
+.container{max-width:1180px;margin:0 auto;padding:0 24px}
+section{padding:80px 0}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:1000;background:rgba(255,255,255,.96);backdrop-filter:blur(10px);border-bottom:1px solid var(--g200)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:60px;max-width:1180px;margin:0 auto;padding:0 24px}
+.nav-logo{font-weight:800;font-size:.95rem;color:var(--purple);display:flex;align-items:center;gap:8px}
+.logo-badge{background:var(--g900);color:#fff;padding:3px 8px;border-radius:6px;font-size:.72rem;font-weight:800;letter-spacing:.06em;line-height:1}
+.nav-links{display:flex;gap:2px;list-style:none}
+.nav-links a{font-size:.8125rem;font-weight:500;color:var(--g600);padding:6px 11px;border-radius:6px;transition:all .2s}
+.nav-links a:hover{background:var(--g100);color:var(--purple)}
+.nav-links a.active{background:var(--purple-light);color:var(--purple);font-weight:700}
+.hamburger{display:none;background:none;border:none;cursor:pointer;font-size:1.4rem;color:var(--g700)}
+.mobile-menu{display:none;flex-direction:column;gap:4px;padding:12px 24px 16px;border-bottom:1px solid var(--g200);background:#fff}
+.mobile-menu a{font-size:.9rem;font-weight:500;color:var(--g700);padding:10px 0;border-bottom:1px solid var(--g100)}
+.mobile-menu.open{display:flex}
+.nav-links{align-items:center}
+.nav-dropdown{position:relative;list-style:none}
+.nav-dropdown-btn{background:var(--g900);color:#fff;border:none;padding:6px 14px;border-radius:6px;font-size:.8125rem;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:5px;transition:background .2s;white-space:nowrap}
+.nav-dropdown-btn:hover{background:var(--g700)}
+.nav-dropdown-menu{display:none;position:absolute;top:calc(100% + 6px);right:0;background:#fff;border-radius:var(--r);box-shadow:var(--shl);border:1px solid var(--g200);min-width:190px;padding:6px;z-index:200}
+.nav-dropdown-menu a{display:block;padding:9px 14px;font-size:.8125rem;font-weight:500;color:var(--g700);border-radius:7px;transition:all .2s}
+.nav-dropdown-menu a:hover{background:var(--g50);color:var(--purple)}
+.nav-dropdown-menu a.active{background:var(--purple-light);color:var(--purple);font-weight:700}
+.nav-dropdown.open .nav-dropdown-menu{display:block}
+.mobile-menu .mobile-sub a{font-size:.85rem;color:var(--g500);padding:7px 0;border-bottom:none}
+
+/* SHARED */
+.section-lbl{display:inline-block;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;padding:4px 12px;border-radius:100px;margin-bottom:10px}
+.lbl-purple{color:var(--purple);background:var(--purple-light)}
+.section-head{text-align:center;max-width:680px;margin:0 auto 52px}
+.section-head h2{color:var(--g900);margin-bottom:10px}
+.section-head p{font-size:.9875rem;color:var(--g500)}
+.g2{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
+.badge{display:inline-block;padding:3px 10px;border-radius:100px;font-size:.7rem;font-weight:700}
+.key-takeaway{background:linear-gradient(135deg,rgba(16,24,40,.04),rgba(54,65,83,.04));border:1.5px solid rgba(16,24,40,.12);border-radius:var(--r);padding:20px 24px;margin-top:40px;display:flex;align-items:flex-start;gap:12px}
+.kt-icon{font-size:1.4rem;flex-shrink:0;line-height:1.4}
+.kt-body h4{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--purple);margin-bottom:4px}
+.kt-body p{font-size:.9375rem;color:var(--g700);line-height:1.65}
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* TABS / FILTER */
+.tab-row{display:flex;gap:4px;background:var(--g100);padding:4px;border-radius:10px;margin-bottom:30px;width:fit-content}
+.tab-btn{padding:8px 18px;border:none;background:none;border-radius:7px;font-size:.8125rem;font-weight:500;color:var(--g500);cursor:pointer;transition:all .2s}
+.tab-btn.active{background:#fff;color:var(--purple);box-shadow:0 1px 3px rgba(0,0,0,.08);font-weight:700}
+
+/* EXPAND BLOCKS */
+.expand-block{border:1.5px solid var(--g200);border-radius:var(--r);overflow:hidden;margin-bottom:10px;transition:border-color .2s}
+.expand-block:hover,.expand-block.open{border-color:var(--purple)}
+.expand-hdr{display:flex;align-items:center;justify-content:space-between;padding:16px 22px;cursor:pointer;background:#fff;user-select:none}
+.expand-hdr:hover{background:var(--g50)}
+.expand-title{font-weight:600;color:var(--g800);display:flex;align-items:center;gap:9px;font-size:.9rem}
+.expand-icon{width:26px;height:26px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:.85rem;transition:transform .3s;background:var(--g100);color:var(--g600)}
+.expand-block.open .expand-icon{transform:rotate(45deg);background:var(--purple-light);color:var(--purple)}
+.expand-body{display:none;padding:0 22px 22px;background:#fff}
+.expand-block.open .expand-body{display:block}
+.tpl-box{background:var(--g50);border-radius:var(--rs);padding:18px;margin-top:14px;font-size:.84rem;line-height:1.8}
+.tpl-box h5{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--g400);margin-bottom:10px}
+.tpl-box p{color:var(--g700)}
+.cklist{list-style:none;padding:0}
+.cklist li{display:flex;align-items:flex-start;gap:9px;padding:5px 0;font-size:.84rem;color:var(--g700)}
+.cklist li::before{content:'';display:inline-block;width:10px;height:10px;border:1.5px solid var(--purple);border-radius:2px;flex-shrink:0;margin-top:4px}
+.quote-block{background:rgba(16,24,40,.04);border-left:3px solid var(--purple);padding:11px 14px;border-radius:0 7px 7px 0;font-size:.82rem;color:var(--g600);font-style:italic;margin-top:9px;line-height:1.7}
+
+@media(max-width:768px){
+  .g2{grid-template-columns:1fr}
+  .hamburger{display:block}
+  .nav-links{display:none}
+  .tab-row{width:100%;flex-wrap:wrap}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a class="nav-logo" href="index.html"><span class="logo-badge">CS</span> Playbook</a>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="index.html#foundation">Foundation</a></li>
+      <li><a href="index.html#current">Startup Phase</a></li>
+      <li><a href="index.html#transition">Scaling Up</a></li>
+      <li><a href="index.html#ai-future">AI Future</a></li>
+      <li class="nav-dropdown">
+        <button class="nav-dropdown-btn" onclick="toggleDropdown()">Workflow &amp; Resources <svg width="9" height="5" viewBox="0 0 9 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:middle;margin-left:1px"><polyline points="1,1 4.5,4 8,1"/></svg></button>
+        <div class="nav-dropdown-menu">
+          <a href="onboarding.html">Onboarding</a>
+          <a href="playbooks.html" class="active">Playbooks</a>
+          <a href="feedback.html">Feedback Loop</a>
+        </div>
+      </li>
+    </ul>
+    <button class="hamburger" id="hamburger" onclick="toggleMobile()"><svg width="18" height="13" viewBox="0 0 18 13" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="0" y1="1" x2="18" y2="1"/><line x1="0" y1="6.5" x2="18" y2="6.5"/><line x1="0" y1="12" x2="18" y2="12"/></svg></button>
+  </div>
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="index.html#foundation" onclick="toggleMobile()">Foundation</a>
+    <a href="index.html#current" onclick="toggleMobile()">Startup Phase</a>
+    <a href="index.html#transition" onclick="toggleMobile()">Scaling Up</a>
+    <a href="index.html#ai-future" onclick="toggleMobile()">AI Future</a>
+    <div class="mobile-sub" style="padding-left:12px;border-left:2px solid var(--g200);margin:2px 0;display:flex;flex-direction:column">
+      <a href="onboarding.html" onclick="toggleMobile()">› Onboarding</a>
+      <a href="playbooks.html" onclick="toggleMobile()" style="color:var(--purple);font-weight:700">› Playbooks</a>
+      <a href="feedback.html" onclick="toggleMobile()">› Feedback Loop</a>
+    </div>
+  </div>
+</nav>
+
+<!-- PLAYBOOK LIBRARY -->
+<section id="playbooks" style="background:#fff">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="section-lbl lbl-purple">Playbook Library</span>
+      <h2>Playbook Library</h2>
+      <p>Eight playbooks with actual content — not descriptions of what a playbook should contain, but what it does contain. Adapt these to your context.</p>
+    </div>
+
+    <!-- Filter bar -->
+    <div class="reveal" style="margin-bottom:28px">
+      <div class="tab-row" style="width:100%;justify-content:flex-start;flex-wrap:wrap">
+        <button class="tab-btn active" onclick="filterPlaybooks('all')">All</button>
+        <button class="tab-btn" onclick="filterPlaybooks('onboarding')">Onboarding</button>
+        <button class="tab-btn" onclick="filterPlaybooks('retention')">Retention</button>
+        <button class="tab-btn" onclick="filterPlaybooks('expansion')">Expansion</button>
+        <button class="tab-btn" onclick="filterPlaybooks('feedback')">Feedback</button>
+      </div>
+    </div>
+
+    <div id="playbook-grid" style="display:flex;flex-direction:column;gap:12px">
+
+      <!-- 1. Kickoff Call -->
+      <div class="expand-block pb-item" data-cat="onboarding" id="pb-kickoff">
+        <div class="expand-hdr" onclick="toggleExpand('pb-kickoff')">
+          <span class="expand-title">
+            <span style="background:var(--purple-light);color:var(--purple);padding:3px 9px;border-radius:6px;font-size:.7rem;font-weight:700">ONBOARDING</span>
+            New Customer Kickoff Call
+          </span>
+          <div style="display:flex;align-items:center;gap:10px">
+            <span style="font-size:.72rem;color:var(--g400)">60 min · CSM owns</span>
+            <span class="expand-icon">+</span>
+          </div>
+        </div>
+        <div class="expand-body">
+          <div class="g2" style="margin-bottom:14px">
+            <div class="tpl-box"><h5>When to use</h5><p>Within 48–72 hours of contract signature for Mid-Market and Enterprise. SMB gets this as an optional call — most prefer the async version.</p></div>
+            <div class="tpl-box"><h5>What to send beforehand (48h before)</h5>
+              <ul class="cklist">
+                <li>Short agenda (no more than 5 bullets)</li>
+                <li>2–3 questions for them to think about: goals, success metrics, internal stakeholders</li>
+                <li>Login credentials if not sent already</li>
+                <li>Your Calendly for future bookings</li>
+              </ul>
+            </div>
+          </div>
+          <div class="tpl-box">
+            <h5>Kickoff Call Agenda (60 min)</h5>
+            <p>
+              <strong>0–5 min — Intros:</strong> Who is on the call, what everyone does. Keep it brief.<br>
+              <strong>5–15 min — Their world:</strong> "Tell me about the problem that led you to buy this." Let them talk. Take notes.<br>
+              <strong>15–25 min — Define success:</strong> "What does a win look like at 30, 60, and 90 days?" Get specific. If they say "better visibility," ask what better looks like in numbers.<br>
+              <strong>25–35 min — Setup walkthrough:</strong> Screen share. Walk through the first 3 setup steps together. Do not send them to a help doc — do it live the first time.<br>
+              <strong>35–45 min — Stakeholder map:</strong> Who is the champion? Who is the exec sponsor? Who will the product affect day-to-day? Who has veto power?<br>
+              <strong>45–55 min — Mutual action plan:</strong> You own X by Friday. They own Y by next Tuesday. Write it down and send it after the call.<br>
+              <strong>55–60 min — Quick win:</strong> "What is one thing you could show your team this week that would make them excited?" Find that thing and go do it.
+            </p>
+          </div>
+          <div class="tpl-box">
+            <h5>Questions to always ask</h5>
+            <ul class="cklist">
+              <li>"What does your team currently use to solve this problem? What do they hate about it?"</li>
+              <li>"Who besides you will measure whether this investment was worth it?"</li>
+              <li>"Have you done implementations like this before? What went wrong?"</li>
+              <li>"What would make you pick up the phone and call me at 9pm?" (Calibrates urgency threshold)</li>
+            </ul>
+          </div>
+          <div class="quote-block">After the call, send a summary email within 2 hours. Subject: "Recap + next steps from today." Include what you heard their goals are, what you both agreed to do, and a clear next meeting date. If you do not send this, the kickoff did not fully happen.</div>
+        </div>
+      </div>
+
+      <!-- 2. QBR Template -->
+      <div class="expand-block pb-item" data-cat="retention" id="pb-qbr2">
+        <div class="expand-hdr" onclick="toggleExpand('pb-qbr2')">
+          <span class="expand-title">
+            <span style="background:#FEF3C7;color:#92400E;padding:3px 9px;border-radius:6px;font-size:.7rem;font-weight:700">RETENTION</span>
+            QBR Full Template (Slide-by-Slide)
+          </span>
+          <div style="display:flex;align-items:center;gap:10px">
+            <span style="font-size:.72rem;color:var(--g400)">75 min · CSM + customer champion</span>
+            <span class="expand-icon">+</span>
+          </div>
+        </div>
+        <div class="expand-body">
+          <div class="tpl-box">
+            <h5>Slide structure (7 slides)</h5>
+            <p>
+              <strong>Slide 1 — Your quarter in context:</strong> One slide. What changed in their business this quarter? New initiatives, org changes, wins, challenges. Ask them to fill this slide. It shows you care about their world, not just your product.<br><br>
+              <strong>Slide 2 — What you set out to do:</strong> The goals from last quarter. Show them verbatim. Honest assessment: hit, partial, or missed.<br><br>
+              <strong>Slide 3 — Usage and adoption:</strong> Real data. Active users, feature adoption, login frequency. Do not cherry-pick. If usage is down, put it on the slide and name it.<br><br>
+              <strong>Slide 4 — Value delivered:</strong> ROI evidence. Time saved, errors reduced, revenue impacted. Use their numbers, not your estimates. If you do not have this yet, make getting it your Q3 goal.<br><br>
+              <strong>Slide 5 — What is not working:</strong> Be the first to say it. "Here are 2 things we know are friction points right now and here is what we are doing about them." This builds more trust than pretending everything is fine.<br><br>
+              <strong>Slide 6 — Roadmap preview:</strong> Three things coming in the next 90 days that are relevant to them. Not a feature dump — only what changes their day-to-day.<br><br>
+              <strong>Slide 7 — Next quarter goals:</strong> Co-create this slide in the meeting. What are they trying to achieve? What does the product need to do to support it? What do you each commit to?
+            </p>
+          </div>
+          <div class="tpl-box">
+            <h5>The question that reframes every QBR</h5>
+            <div class="quote-block">"If you had to justify this contract to your CFO today, what would you say?" This one question will tell you everything you need to know about whether your customer can defend the spend — and whether you are at risk.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. At-Risk Recovery -->
+      <div class="expand-block pb-item" data-cat="retention" id="pb-atrisk">
+        <div class="expand-hdr" onclick="toggleExpand('pb-atrisk')">
+          <span class="expand-title">
+            <span style="background:#FEE2E2;color:#991B1B;padding:3px 9px;border-radius:6px;font-size:.7rem;font-weight:700">RETENTION</span>
+            At-Risk Account Recovery — 6-Step Process
+          </span>
+          <div style="display:flex;align-items:center;gap:10px">
+            <span style="font-size:.72rem;color:var(--g400)">1–3 weeks · CSM + CS Lead</span>
+            <span class="expand-icon">+</span>
+          </div>
+        </div>
+        <div class="expand-body">
+          <div class="tpl-box">
+            <h5>Step 1 — Diagnose before you act</h5>
+            <p>Before you reach out, do your homework. What does the usage data show? When did it change? What support tickets are open? When did you last speak to someone there? You need to know what you are walking into. Do not go in blind.</p>
+          </div>
+          <div class="tpl-box">
+            <h5>Step 2 — The first outreach (phone, not email)</h5>
+            <div class="quote-block">Call. Do not email. Emails get ignored when someone is disengaged. A phone call — even voicemail — signals that you are taking this seriously.<br><br>"Hi Jordan, it is Marcus from [Product]. I wanted to reach out directly because I noticed things have been a bit quieter lately and I want to make sure we are not missing something. Do you have 15 minutes this week? I would rather have an honest conversation than wonder."</div>
+          </div>
+          <div class="tpl-box">
+            <h5>Step 3 — The recovery call</h5>
+            <p>
+              <strong>Opening:</strong> "I am not here to pitch anything. I want to understand what is happening from your perspective."<br>
+              <strong>Listen:</strong> Let them go. Really go. Do not interrupt. Do not defend. Take notes.<br>
+              <strong>Reflect:</strong> Summarize what you heard. "It sounds like the main issues are X and Y — is that right?"<br>
+              <strong>Own:</strong> If anything is your fault, say so directly. No corporate language.<br>
+              <strong>Commit:</strong> "Here is what I am going to do. Here is when you will hear from me."
+            </p>
+          </div>
+          <div class="tpl-box">
+            <h5>Step 4 — Escalation path</h5>
+            <ul class="cklist">
+              <li>Flag in #at-risk-accounts: account name, ARR, risk reason, next action</li>
+              <li>CS Lead looped in if ARR over $25K or renewal in under 60 days</li>
+              <li>Exec-to-exec outreach if no response after 48h or if relationship is damaged</li>
+              <li>Weekly internal sync until resolved or churned</li>
+            </ul>
+          </div>
+          <div class="tpl-box">
+            <h5>Step 5 — Recovery plan (written)</h5>
+            <p>Send a written plan within 48h of the recovery call. Subject: "Our plan to fix this." Include: what you heard, what you are doing, who owns each action, and a timeline. Do not be vague. "We will look into it" is not a plan.</p>
+          </div>
+          <div class="tpl-box">
+            <h5>Step 6 — The check-in loop</h5>
+            <p>Do not wait for them to come back to you. Check in proactively every 5–7 days until the issue is fully resolved. When it is fixed, close the loop: "I wanted to confirm that X is working now. Are you seeing the same thing on your end?" Then log it as resolved and note what you learned.</p>
+          </div>
+          <div style="background:#FEE2E2;border-radius:var(--r);padding:16px 20px;margin-top:14px">
+            <strong style="color:#991B1B;font-size:.84rem">What not to say:</strong>
+            <ul style="margin-top:8px;padding-left:16px;font-size:.82rem;color:#7F1D1D;line-height:1.8">
+              <li>"I just wanted to check in." (Too passive. You noticed something — name it.)</li>
+              <li>"We have been really busy on our end." (They do not care. Take ownership.)</li>
+              <li>"What would it take to keep you?" early in the conversation (Skips the diagnosis.)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4. Expansion Conversation -->
+      <div class="expand-block pb-item" data-cat="expansion" id="pb-expand">
+        <div class="expand-hdr" onclick="toggleExpand('pb-expand')">
+          <span class="expand-title">
+            <span style="background:var(--teal-light);color:var(--teal);padding:3px 9px;border-radius:6px;font-size:.7rem;font-weight:700">EXPANSION</span>
+            Expansion Conversation Framework
+          </span>
+          <div style="display:flex;align-items:center;gap:10px">
+            <span style="font-size:.72rem;color:var(--g400)">30–45 min · CSM</span>
+            <span class="expand-icon">+</span>
+          </div>
+        </div>
+        <div class="expand-body">
+          <div class="tpl-box">
+            <h5>Signals that say "they are ready to expand"</h5>
+            <ul class="cklist">
+              <li>Usage is up significantly quarter-over-quarter (especially new features)</li>
+              <li>Multiple users being added to the account organically</li>
+              <li>Customer mentions other teams or use cases in passing</li>
+              <li>NPS is high (8–10) and they have given you a referral</li>
+              <li>They are hitting the ceiling of their current plan</li>
+              <li>They said "I wish we could do X" — and you have a feature for X</li>
+            </ul>
+          </div>
+          <div class="tpl-box">
+            <h5>How to open the conversation</h5>
+            <p>Do not lead with the product. Lead with their success.</p>
+            <div class="quote-block">"Sarah, I was reviewing your team's usage this quarter and noticed something interesting — your finance team has been using the reporting module every day for the last 6 weeks. That is your second team to really embed this into their workflow. I wanted to ask: are there other teams at Acme who deal with the same kind of reporting problem?"</div>
+          </div>
+          <div class="tpl-box">
+            <h5>Email template — expansion outreach</h5>
+            <p><strong>Subject:</strong> Something I noticed in your account — worth a quick conversation<br><br>Hi Sarah — quick one. Looking at your usage data, your team has processed 3x more reports this quarter than last. That growth usually means one of two things: either the tool is working really well, or the team is getting stretched.<br><br>I wanted to see if it makes sense to talk about adding your ops team — I have seen 3 other companies your size do this and the time savings compound quickly.<br><br>Would 20 minutes this week work? No pressure — just wanted to flag it while I was thinking about it.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5. Churn Save -->
+      <div class="expand-block pb-item" data-cat="retention" id="pb-churn">
+        <div class="expand-hdr" onclick="toggleExpand('pb-churn')">
+          <span class="expand-title">
+            <span style="background:#FEE2E2;color:#991B1B;padding:3px 9px;border-radius:6px;font-size:.7rem;font-weight:700">RETENTION</span>
+            Churn Save Playbook
+          </span>
+          <div style="display:flex;align-items:center;gap:10px">
+            <span style="font-size:.72rem;color:var(--g400)">Immediate · CSM + CS Lead + Exec</span>
+            <span class="expand-icon">+</span>
+          </div>
+        </div>
+        <div class="expand-body">
+          <div class="tpl-box">
+            <h5>When to engage (you have 48 hours)</h5>
+            <ul class="cklist">
+              <li>Customer sends a cancellation email or formal notice</li>
+              <li>Customer says "we are evaluating other options" in any context</li>
+              <li>Champion goes silent and you know contract is up in under 30 days</li>
+              <li>Health score drops below 30 with renewal under 60 days</li>
+            </ul>
+          </div>
+          <div class="tpl-box">
+            <h5>What to offer — and what not to</h5>
+            <p><strong>Offer:</strong> A direct conversation to understand the reason. Executive involvement if appropriate. A concrete fix if the issue is addressable. Honest acknowledgement if you dropped the ball.<br><br>
+            <strong>Do not offer immediately:</strong> Discount (it cheapens the relationship and may not be the issue). Credits without understanding the root cause. Promises your product cannot keep right now.</p>
+          </div>
+          <div class="tpl-box">
+            <h5>Churn save email template</h5>
+            <p><strong>Subject:</strong> Before you go — can we talk?<br><br>Hi Jordan — I heard you are considering cancelling, and I wanted to reach out personally rather than just process the request.<br><br>I would like to understand what happened. Not to change your mind — but because if we failed you, I want to know how so we can do better. And if there is something we can fix in the next two weeks, I want to at least put it on the table.<br><br>Would you be open to a 20-minute call this week? If not, I completely understand — but I wanted to ask directly.</p>
+          </div>
+          <div class="tpl-box">
+            <h5>If you cannot save it — do the exit interview</h5>
+            <p>An honest churn interview is worth more than a hundred surveys. Ask: "What ultimately drove the decision? What would have needed to be different for you to stay? Who are you switching to and what are you hoping they will do better?" Log every answer. Share with product and leadership. The customer who churned honestly just gave you your next roadmap insight.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 6. EBR -->
+      <div class="expand-block pb-item" data-cat="retention expansion" id="pb-ebr">
+        <div class="expand-hdr" onclick="toggleExpand('pb-ebr')">
+          <span class="expand-title">
+            <span style="background:var(--purple-light);color:var(--purple);padding:3px 9px;border-radius:6px;font-size:.7rem;font-weight:700">ENTERPRISE</span>
+            Executive Business Review (EBR)
+          </span>
+          <div style="display:flex;align-items:center;gap:10px">
+            <span style="font-size:.72rem;color:var(--g400)">90 min · CSM + Head of CS + Exec Sponsor</span>
+            <span class="expand-icon">+</span>
+          </div>
+        </div>
+        <div class="expand-body">
+          <div class="tpl-box">
+            <h5>EBR vs QBR — what is different</h5>
+            <p>A QBR is operational: usage, progress, what is working. An EBR is strategic: business impact, multi-year vision, executive alignment. The audience is different. The C-suite does not want to see feature screenshots. They want to see how your product moved their business metrics.</p>
+          </div>
+          <div class="tpl-box">
+            <h5>EBR Agenda (90 min)</h5>
+            <p>
+              <strong>0–10 min — Executive context:</strong> Ask them to share their top 2–3 business priorities for the next 12 months. Listen carefully. Your entire pitch depends on this.<br>
+              <strong>10–30 min — Business impact review:</strong> Show ROI data in their language. Not "feature adoption" — "your team saved 400 hours this year." Use business units and dollar amounts.<br>
+              <strong>30–45 min — Strategic alignment:</strong> How does your product roadmap connect to the priorities they just named? Be specific and honest about what is coming and when.<br>
+              <strong>45–60 min — Risk and obstacles:</strong> What is getting in the way of full value? What do they need from you? What do you need from them? (User training, data access, exec sponsorship.)<br>
+              <strong>60–80 min — Partnership opportunities:</strong> Joint case study? Reference call? Co-innovation on a roadmap item? Expansion to new divisions?<br>
+              <strong>80–90 min — 12-month success plan:</strong> Co-create measurable goals. Write them down. Send them within 24 hours.
+            </p>
+          </div>
+          <div class="tpl-box">
+            <h5>The one EBR rule</h5>
+            <div class="quote-block">Never bring a problem to an EBR without a proposed solution. Executives will forgive honest problems. They will not forgive being surprised by problems you already knew about.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 7. VoC Intake -->
+      <div class="expand-block pb-item" data-cat="feedback" id="pb-voc">
+        <div class="expand-hdr" onclick="toggleExpand('pb-voc')">
+          <span class="expand-title">
+            <span style="background:var(--teal-light);color:var(--teal);padding:3px 9px;border-radius:6px;font-size:.7rem;font-weight:700">FEEDBACK</span>
+            Voice of Customer Intake Process
+          </span>
+          <div style="display:flex;align-items:center;gap:10px">
+            <span style="font-size:.72rem;color:var(--g400)">5 min per entry · All CSMs</span>
+            <span class="expand-icon">+</span>
+          </div>
+        </div>
+        <div class="expand-body">
+          <div class="tpl-box">
+            <h5>Why this needs to be a habit, not a project</h5>
+            <p>Feedback only has value if it is captured consistently and in a searchable format. One CSM logging five pieces of feedback a week creates a corpus that transforms your product meetings. The format matters: "customers want better reports" is useless. "7 customers averaging $22K ARR have said they cannot share dashboards with their board without exporting to Excel first, which takes 2 hours" is a product brief.</p>
+          </div>
+          <div class="tpl-box">
+            <h5>The 3-sentence feedback format</h5>
+            <p>When you log feedback, use this structure:<br><br>
+            <strong>Sentence 1 — The observation:</strong> What the customer said or did, in their words.<br>
+            <strong>Sentence 2 — The context:</strong> Who they are (segment, ARR), why this matters to them, what they are trying to achieve.<br>
+            <strong>Sentence 3 — The implication:</strong> What happens if this is not addressed — churn risk, expansion blocked, workaround pain.</p>
+            <div class="quote-block"><strong>Good example:</strong> "Sarah at Acme Corp said: we spend 3 hours per week manually pulling data into spreadsheets because the export function does not support pivot tables. She is a $42K ARR Mid-Market account. Without this, she cannot present the data to her VP in the format they require — and it came up in her renewal call as a friction point."</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 8. Full Onboarding Checklist -->
+      <div class="expand-block pb-item" data-cat="onboarding" id="pb-full-onboarding">
+        <div class="expand-hdr" onclick="toggleExpand('pb-full-onboarding')">
+          <span class="expand-title">
+            <span style="background:var(--purple-light);color:var(--purple);padding:3px 9px;border-radius:6px;font-size:.7rem;font-weight:700">ONBOARDING</span>
+            Complete Onboarding Checklist — Day 1 through Day 90
+          </span>
+          <div style="display:flex;align-items:center;gap:10px">
+            <span style="font-size:.72rem;color:var(--g400)">90 days · CSM</span>
+            <span class="expand-icon">+</span>
+          </div>
+        </div>
+        <div class="expand-body">
+          <div class="g2">
+            <div class="tpl-box">
+              <h5>Day 1 — First 24 hours</h5>
+              <ul class="cklist">
+                <li>Send personalized welcome email — mention something specific from sales handoff notes</li>
+                <li>Create customer record in CRM: segment, ARR, renewal date, champion, exec sponsor</li>
+                <li>Send Calendly link for kickoff call (suggest 2 options within next 72 hours)</li>
+                <li>Confirm login credentials were received and working</li>
+                <li>Introduce yourself in their Slack channel if shared workspace exists</li>
+                <li>Internal: create shared Notion page for this account — link from CRM</li>
+              </ul>
+            </div>
+            <div class="tpl-box">
+              <h5>Week 1 — Kickoff and first value</h5>
+              <ul class="cklist">
+                <li>Run kickoff call (see Kickoff playbook above)</li>
+                <li>Complete first setup step together on screen share — do not just send a link</li>
+                <li>Identify and achieve one "quick win" they can show internally this week</li>
+                <li>Send post-kickoff summary with mutual action items within 2 hours</li>
+                <li>Set 30-day milestone and put check-in on calendar now</li>
+                <li>Log initial health score baseline</li>
+              </ul>
+            </div>
+            <div class="tpl-box">
+              <h5>Month 1 — Building habits</h5>
+              <ul class="cklist">
+                <li>30-day check-in call: review progress against kickoff goals</li>
+                <li>Pull usage data before the call — do not ask what you can see</li>
+                <li>Introduce 2–3 additional features relevant to their specific use case</li>
+                <li>Collect first CSAT or informal NPS (one-question survey by email)</li>
+                <li>Identify champion vs exec sponsor — are they different people? Who has budget authority?</li>
+                <li>Document first piece of ROI evidence (even if small)</li>
+              </ul>
+            </div>
+            <div class="tpl-box">
+              <h5>Day 90 — Success review and expansion</h5>
+              <ul class="cklist">
+                <li>Formal 90-day success review: did they hit the goals set at kickoff?</li>
+                <li>Prepare ROI summary with specific numbers — time saved, revenue impacted, errors reduced</li>
+                <li>Honest assessment: where did the product fall short? Do not hide it.</li>
+                <li>Identify and present one expansion opportunity if health is green</li>
+                <li>Set new 6-month success goals — documented and sent to champion</li>
+                <li>If strong relationship: ask for case study, G2 review, or warm referral</li>
+                <li>Update health score and renewal forecast in CRM</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- end playbook-grid -->
+
+    <div class="key-takeaway reveal"><span class="kt-icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="10,2 18,10 10,18 2,10"/></svg></span><div class="kt-body"><h4>Key Takeaway</h4><p>Playbooks are starting points, not scripts. The best CSMs know when to deviate — when the customer is in a strange mood, when something happened in their business that changes everything, when the standard process would actually hurt the relationship. Use these as defaults. Override them with judgment.</p></div></div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer style="background:var(--g900);color:#fff;padding:48px 0 32px">
+  <div class="container">
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin-bottom:36px">
+      <div>
+        <div style="font-weight:800;font-size:1.1rem;color:#fff;margin-bottom:10px"><span class="logo-badge">CS</span> Playbook</div>
+        <p style="font-size:.84rem;color:#94A3B8;line-height:1.7">A practitioner-built guide to customer success — from the messy startup phase to the AI-powered future. Not a brochure. A working playbook.</p>
+      </div>
+      <div>
+        <div style="font-weight:700;font-size:.84rem;color:#94A3B8;text-transform:uppercase;letter-spacing:.08em;margin-bottom:14px">Main Guide</div>
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <a href="index.html#foundation" style="color:#CBD5E1;font-size:.84rem;text-decoration:none;transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#CBD5E1'">The Foundation</a>
+          <a href="index.html#current" style="color:#CBD5E1;font-size:.84rem;text-decoration:none;transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#CBD5E1'">Startup Phase</a>
+          <a href="index.html#transition" style="color:#CBD5E1;font-size:.84rem;text-decoration:none;transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#CBD5E1'">Scaling Up</a>
+          <a href="index.html#feedback" style="color:#CBD5E1;font-size:.84rem;text-decoration:none;transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#CBD5E1'">Feedback Loop</a>
+        </div>
+      </div>
+      <div>
+        <div style="font-weight:700;font-size:.84rem;color:#94A3B8;text-transform:uppercase;letter-spacing:.08em;margin-bottom:14px">More</div>
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <a href="index.html#onboarding" style="color:#CBD5E1;font-size:.84rem;text-decoration:none;transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#CBD5E1'">Onboarding</a>
+          <a href="index.html#ai-future" style="color:#CBD5E1;font-size:.84rem;text-decoration:none;transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#CBD5E1'">AI Future State</a>
+        </div>
+      </div>
+    </div>
+    <div style="border-top:1px solid #1F2937;padding-top:20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
+      <p style="color:#4B5563;font-size:.8rem">Built for CS practitioners. Use it, adapt it, share it.</p>
+      <a href="index.html" style="color:#94A3B8;font-size:.84rem;font-weight:600;text-decoration:none">← Back to main guide</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+function toggleMobile() {
+  document.getElementById('mobile-menu').classList.toggle('open');
+}
+function toggleDropdown() {
+  document.querySelector('.nav-dropdown').classList.toggle('open');
+}
+document.addEventListener('click', function(e) {
+  if (!e.target.closest('.nav-dropdown')) {
+    var d = document.querySelector('.nav-dropdown');
+    if (d) d.classList.remove('open');
+  }
+});
+
+function toggleExpand(id) {
+  var el = document.getElementById(id);
+  if (el) el.classList.toggle('open');
+}
+
+function filterPlaybooks(cat) {
+  document.querySelectorAll('.pb-item').forEach(function(item) {
+    var cats = (item.getAttribute('data-cat') || '').split(' ');
+    item.style.display = (cat === 'all' || cats.indexOf(cat) !== -1) ? '' : 'none';
+  });
+  document.querySelectorAll('[onclick^="filterPlaybooks"]').forEach(function(btn) {
+    btn.classList.toggle('active', btn.getAttribute('onclick').indexOf("'" + cat + "'") !== -1);
+  });
+}
+
+(function() {
+  if (!window.IntersectionObserver) return;
+  var obs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(function(el) { obs.observe(el); });
+})();
+</script>
+</body>
+</html>

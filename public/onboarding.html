@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Onboarding — CS Playbook</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --purple:#101828; --purple-light:rgba(16,24,40,0.07);
+  --teal:#364153; --teal-light:rgba(54,65,83,0.07);
+  --amber:#F59E0B; --amber-light:#FFFBEB;
+  --red:#EF4444; --green:#10B981;
+  --g50:#f9fafb; --g100:#f3f4f6; --g200:#e5e7eb; --g300:#d1d5dc;
+  --g400:#99a1af; --g500:#6a7282; --g600:#4a5565; --g700:#364153;
+  --g800:#1f2937; --g900:#101828;
+  --sh:0 4px 6px rgba(0,0,0,.07),0 1px 3px rgba(0,0,0,.06);
+  --shm:0 10px 15px rgba(0,0,0,.07),0 4px 6px rgba(0,0,0,.05);
+  --shl:0 20px 25px rgba(0,0,0,.08),0 10px 10px rgba(0,0,0,.04);
+  --r:12px; --rs:8px; --rl:16px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;color:var(--g800);background:#fff;line-height:1.6}
+h2{font-size:clamp(1.4rem,3vw,2.1rem);font-weight:700;line-height:1.2}
+h3{font-size:1.2rem;font-weight:600}
+h4{font-size:.95rem;font-weight:600}
+p{color:var(--g600)}
+a{color:inherit;text-decoration:none}
+.container{max-width:1180px;margin:0 auto;padding:0 24px}
+section{padding:80px 0}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:1000;background:rgba(255,255,255,.96);backdrop-filter:blur(10px);border-bottom:1px solid var(--g200)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:60px;max-width:1180px;margin:0 auto;padding:0 24px}
+.nav-logo{font-weight:800;font-size:.95rem;color:var(--purple);display:flex;align-items:center;gap:8px}
+.logo-badge{background:var(--g900);color:#fff;padding:3px 8px;border-radius:6px;font-size:.72rem;font-weight:800;letter-spacing:.06em;line-height:1}
+.nav-links{display:flex;gap:2px;list-style:none;align-items:center}
+.nav-links a{font-size:.8125rem;font-weight:500;color:var(--g600);padding:6px 11px;border-radius:6px;transition:all .2s}
+.nav-links a:hover{background:var(--g100);color:var(--purple)}
+.nav-dropdown{position:relative;list-style:none}
+.nav-dropdown-btn{background:var(--g900);color:#fff;border:none;padding:6px 14px;border-radius:6px;font-size:.8125rem;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:5px;transition:background .2s;white-space:nowrap}
+.nav-dropdown-btn:hover{background:var(--g700)}
+.nav-dropdown-menu{display:none;position:absolute;top:calc(100% + 6px);right:0;background:#fff;border-radius:var(--r);box-shadow:var(--shl);border:1px solid var(--g200);min-width:190px;padding:6px;z-index:200}
+.nav-dropdown-menu a{display:block;padding:9px 14px;font-size:.8125rem;font-weight:500;color:var(--g700);border-radius:7px;transition:all .2s}
+.nav-dropdown-menu a:hover{background:var(--g50);color:var(--purple)}
+.nav-dropdown-menu a.active{background:var(--purple-light);color:var(--purple);font-weight:700}
+.nav-dropdown.open .nav-dropdown-menu{display:block}
+.hamburger{display:none;background:none;border:none;cursor:pointer;font-size:1.4rem;color:var(--g700)}
+.mobile-menu{display:none;flex-direction:column;gap:4px;padding:12px 24px 16px;border-bottom:1px solid var(--g200);background:#fff}
+.mobile-menu a{font-size:.9rem;font-weight:500;color:var(--g700);padding:10px 0;border-bottom:1px solid var(--g100)}
+.mobile-menu .mobile-sub a{padding:8px 0;font-size:.85rem;color:var(--g500);border-bottom:none;padding-left:12px}
+.mobile-menu.open{display:flex}
+
+/* SHARED */
+.section-lbl{display:inline-block;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;padding:4px 12px;border-radius:100px;margin-bottom:10px}
+.lbl-teal{color:var(--teal);background:var(--teal-light)}
+.section-head{text-align:center;max-width:680px;margin:0 auto 52px}
+.section-head h2{color:var(--g900);margin-bottom:10px}
+.section-head p{font-size:.9875rem;color:var(--g500)}
+.card{background:#fff;border-radius:var(--r);box-shadow:var(--sh);padding:26px;border:1px solid var(--g100);transition:all .3s}
+.card:hover{box-shadow:var(--shm);transform:translateY(-2px)}
+.g2{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
+.badge{display:inline-block;padding:3px 10px;border-radius:100px;font-size:.7rem;font-weight:700}
+.b-amber{background:#FEF3C7;color:#92400E}
+.b-green{background:#D1FAE5;color:#065F46}
+.b-teal{background:var(--teal-light);color:var(--teal)}
+.key-takeaway{background:linear-gradient(135deg,rgba(16,24,40,.04),rgba(54,65,83,.04));border:1.5px solid rgba(16,24,40,.12);border-radius:var(--r);padding:20px 24px;margin-top:40px;display:flex;align-items:flex-start;gap:12px}
+.kt-icon{font-size:1.4rem;flex-shrink:0;line-height:1.4}
+.kt-body h4{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--purple);margin-bottom:4px}
+.kt-body p{font-size:.9375rem;color:var(--g700);line-height:1.65}
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.tpl-box{background:var(--g50);border-radius:var(--rs);padding:18px;margin-top:14px;font-size:.84rem;line-height:1.8}
+.tpl-box h5{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--g400);margin-bottom:10px}
+.tpl-box p{color:var(--g700)}
+
+/* ONBOARDING SPECIFIC */
+.seg-table{width:100%;border-collapse:collapse;font-size:.84rem}
+.seg-table th{background:var(--g900);color:#fff;padding:12px 15px;text-align:left;font-weight:600;font-size:.78rem}
+.seg-table td{padding:13px 15px;border-bottom:1px solid var(--g100);vertical-align:top}
+.seg-table tr:hover td{background:var(--g50)}
+.tab-row{display:flex;gap:4px;background:var(--g100);padding:4px;border-radius:10px;margin-bottom:30px;width:fit-content}
+.tab-btn{padding:8px 18px;border:none;background:none;border-radius:7px;font-size:.8125rem;font-weight:500;color:var(--g500);cursor:pointer;transition:all .2s}
+.tab-btn.active{background:#fff;color:var(--purple);box-shadow:0 1px 3px rgba(0,0,0,.08);font-weight:700}
+.tab-panel{display:none}.tab-panel.active{display:block}
+
+@media(max-width:768px){
+  .g2{grid-template-columns:1fr}
+  .hamburger{display:block}
+  .nav-links{display:none}
+  .tab-row{flex-wrap:wrap}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a class="nav-logo" href="index.html"><span class="logo-badge">CS</span> Playbook</a>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="index.html#foundation">Foundation</a></li>
+      <li><a href="index.html#current">Startup Phase</a></li>
+      <li><a href="index.html#transition">Scaling Up</a></li>
+      <li><a href="index.html#ai-future">AI Future</a></li>
+      <li class="nav-dropdown">
+        <button class="nav-dropdown-btn" onclick="toggleDropdown()">Workflow &amp; Resources <svg width="9" height="5" viewBox="0 0 9 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:middle;margin-left:1px"><polyline points="1,1 4.5,4 8,1"/></svg></button>
+        <div class="nav-dropdown-menu">
+          <a href="onboarding.html" class="active">Onboarding</a>
+          <a href="playbooks.html">Playbooks</a>
+          <a href="feedback.html">Feedback Loop</a>
+        </div>
+      </li>
+    </ul>
+    <button class="hamburger" id="hamburger" onclick="toggleMobile()"><svg width="18" height="13" viewBox="0 0 18 13" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="0" y1="1" x2="18" y2="1"/><line x1="0" y1="6.5" x2="18" y2="6.5"/><line x1="0" y1="12" x2="18" y2="12"/></svg></button>
+  </div>
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="index.html#foundation" onclick="toggleMobile()">Foundation</a>
+    <a href="index.html#current" onclick="toggleMobile()">Startup Phase</a>
+    <a href="index.html#transition" onclick="toggleMobile()">Scaling Up</a>
+    <a href="index.html#ai-future" onclick="toggleMobile()">AI Future</a>
+    <div class="mobile-sub" style="padding-left:12px;border-left:2px solid var(--g200);margin:2px 0;display:flex;flex-direction:column">
+      <a href="onboarding.html" onclick="toggleMobile()" style="color:var(--purple);font-weight:700">› Onboarding</a>
+      <a href="playbooks.html" onclick="toggleMobile()">› Playbooks</a>
+      <a href="feedback.html" onclick="toggleMobile()">› Feedback Loop</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ONBOARDING -->
+<section id="onboarding" style="background:linear-gradient(180deg,#fff 0%,#f9fafb 100%)">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="section-lbl lbl-teal">Onboarding</span>
+      <h2>Onboarding — Current vs Future State</h2>
+      <p>The gap between manual and automated onboarding is not about technology. It is about how much of your team's time you are willing to spend on repetitive work.</p>
+    </div>
+
+    <div class="reveal" style="margin-bottom:52px">
+      <h3 style="margin-bottom:16px;color:var(--g900)">Side-by-Side Comparison</h3>
+      <div style="overflow-x:auto">
+      <table class="seg-table">
+        <thead><tr><th>Milestone</th><th style="background:#92400E">Current State (Manual)</th><th style="background:#065F46">Future State (Automated + AI)</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Day 0 — Sign</strong></td><td>CSM manually sends welcome email + Calendly link. Customer waits 1–2 days for first contact.</td><td>Instant: automated welcome email, in-app onboarding checklist appears on first login, setup wizard begins.</td></tr>
+          <tr><td><strong>Day 1 — First Login</strong></td><td>CSM checks if customer logged in. Sends follow-up if not. Manual note in CRM.</td><td>In-app prompt: "Let us get you set up — this takes 8 minutes." AI assistant available immediately. Login event triggers CRM update.</td></tr>
+          <tr><td><strong>Day 3 — Setup</strong></td><td>Kickoff call scheduled at sign. CSM walks through setup live on screen share.</td><td>If setup checklist under 30% complete: automated nudge email. "You have not connected your data source yet — here is a 2-min video."</td></tr>
+          <tr><td><strong>Day 7 — First Value</strong></td><td>CSM reviews usage data manually. Calls if no usage. Emails if looks OK.</td><td>Health score calculated automatically. If no first value milestone hit: triggered CSM task + automated email from CSM.</td></tr>
+          <tr><td><strong>Day 14 — Check-in</strong></td><td>CSM schedules and runs 14-day call. Takes notes. Updates CRM manually.</td><td>For SMB: automated digest email with usage summary. For MM/Enterprise: CSM auto-briefed with usage report before call.</td></tr>
+          <tr><td><strong>Day 30 — Review</strong></td><td>CSM prepares review manually. Pulls usage, builds slide, schedules call.</td><td>Automated 30-day report emailed to customer. CSM gets pre-built deck with live data. Meeting scheduled automatically if health below 60.</td></tr>
+          <tr><td><strong>Day 90 — Success</strong></td><td>CSM preps success review, identifies expansion opportunities manually.</td><td>AI surfaces expansion signals. CSM gets prompt: "Acme Corp looks ready for seats upgrade — here is the data."</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+
+    <div class="g2 reveal" style="margin-bottom:52px">
+      <div>
+        <h3 style="margin-bottom:6px;color:var(--g900)">Current State Timeline</h3>
+        <p style="font-size:.84rem;color:var(--g500);margin-bottom:18px">Manual touchpoints only. Every step requires a human decision.</p>
+        <div style="display:flex;flex-direction:column;gap:0">
+          <div style="display:flex;gap:14px;align-items:flex-start;padding-bottom:20px">
+            <div style="display:flex;flex-direction:column;align-items:center;flex-shrink:0"><div style="width:36px;height:36px;border-radius:50%;background:#F59E0B;color:#fff;display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:700">D0</div><div style="width:2px;height:30px;background:var(--g200);margin-top:4px"></div></div>
+            <div style="padding-top:6px"><strong style="font-size:.9rem">Day 0 — Contract signed</strong><p style="font-size:.82rem;color:var(--g500);margin-top:3px">CSM notified via Slack. Manual welcome email sent within 24h. Calendly link shared.</p></div>
+          </div>
+          <div style="display:flex;gap:14px;align-items:flex-start;padding-bottom:20px">
+            <div style="display:flex;flex-direction:column;align-items:center;flex-shrink:0"><div style="width:36px;height:36px;border-radius:50%;background:#F59E0B;color:#fff;display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:700">D3</div><div style="width:2px;height:30px;background:var(--g200);margin-top:4px"></div></div>
+            <div style="padding-top:6px"><strong style="font-size:.9rem">Day 3 — Kickoff call</strong><p style="font-size:.82rem;color:var(--g500);margin-top:3px">60-min call. CSM shares Google Doc checklist. Homework assigned to customer.</p></div>
+          </div>
+          <div style="display:flex;gap:14px;align-items:flex-start;padding-bottom:20px">
+            <div style="display:flex;flex-direction:column;align-items:center;flex-shrink:0"><div style="width:36px;height:36px;border-radius:50%;background:#F59E0B;color:#fff;display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:700">D14</div><div style="width:2px;height:30px;background:var(--g200);margin-top:4px"></div></div>
+            <div style="padding-top:6px"><strong style="font-size:.9rem">Day 14 — Manual follow-up</strong><p style="font-size:.82rem;color:var(--g500);margin-top:3px">CSM checks if checklist was completed. Email if not. No automated fallback.</p></div>
+          </div>
+          <div style="display:flex;gap:14px;align-items:flex-start;padding-bottom:20px">
+            <div style="display:flex;flex-direction:column;align-items:center;flex-shrink:0"><div style="width:36px;height:36px;border-radius:50%;background:#F59E0B;color:#fff;display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:700">D30</div><div style="width:2px;height:30px;background:var(--g200);margin-top:4px"></div></div>
+            <div style="padding-top:6px"><strong style="font-size:.9rem">Day 30 — Check-in call</strong><p style="font-size:.82rem;color:var(--g500);margin-top:3px">CSM manually preps, schedules, runs. Updates notes in CRM. No automation.</p></div>
+          </div>
+          <div style="display:flex;gap:14px;align-items:flex-start">
+            <div style="flex-shrink:0"><div style="width:36px;height:36px;border-radius:50%;background:#F59E0B;color:#fff;display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:700">D90</div></div>
+            <div style="padding-top:6px"><strong style="font-size:.9rem">Day 90 — Success review</strong><p style="font-size:.82rem;color:var(--g500);margin-top:3px">If CSM remembered to book it. ROI data pulled manually. Expansion pitched if gut says yes.</p></div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <h3 style="margin-bottom:6px;color:var(--teal)">Future State — In-App Onboarding Mockup</h3>
+        <p style="font-size:.84rem;color:var(--g500);margin-bottom:18px">What Notion, Linear, and best-in-class SaaS products do. Build this with Appcues or Pendo.</p>
+        <div style="background:#1E293B;border-radius:12px;overflow:hidden;box-shadow:var(--shl)">
+          <div style="background:#0F172A;padding:10px 16px;display:flex;align-items:center;gap:8px">
+            <div style="width:10px;height:10px;border-radius:50%;background:#EF4444"></div>
+            <div style="width:10px;height:10px;border-radius:50%;background:#F59E0B"></div>
+            <div style="width:10px;height:10px;border-radius:50%;background:#10B981"></div>
+            <span style="font-size:.72rem;color:#64748B;margin-left:8px">app.yourproduct.com/dashboard</span>
+          </div>
+          <div style="padding:20px">
+            <div style="background:#0F172A;border-radius:8px;padding:16px;margin-bottom:12px;border:1px solid #334155">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+                <span style="color:#F1F5F9;font-size:.875rem;font-weight:700">Get started — 3 steps left</span>
+                <span style="color:#4a5565;font-size:.75rem;font-weight:600">62% complete</span>
+              </div>
+              <div style="background:#1E293B;height:6px;border-radius:3px;margin-bottom:14px"><div style="background:linear-gradient(90deg,#101828,#4a5565);width:62%;height:100%;border-radius:3px"></div></div>
+              <div style="display:flex;flex-direction:column;gap:7px">
+                <div style="display:flex;align-items:center;gap:9px;padding:8px 10px;background:#1E293B;border-radius:6px"><span style="color:#10B981">✓</span><span style="color:#94A3B8;font-size:.8rem;text-decoration:line-through">Connect your data source</span></div>
+                <div style="display:flex;align-items:center;gap:9px;padding:8px 10px;background:#1E293B;border-radius:6px"><span style="color:#10B981">✓</span><span style="color:#94A3B8;font-size:.8rem;text-decoration:line-through">Invite your first team member</span></div>
+                <div style="display:flex;align-items:center;gap:9px;padding:8px 10px;background:#101828;border-radius:6px;cursor:pointer"><span style="color:#fff">→</span><span style="color:#fff;font-size:.8rem;font-weight:600">Create your first report</span><span style="margin-left:auto;font-size:.65rem;background:rgba(255,255,255,.2);color:#fff;padding:2px 7px;border-radius:100px">2 min</span></div>
+                <div style="display:flex;align-items:center;gap:9px;padding:8px 10px;background:#1E293B;border-radius:6px;opacity:.5"><span style="color:#475569">○</span><span style="color:#64748B;font-size:.8rem">Set up automated alerts</span></div>
+                <div style="display:flex;align-items:center;gap:9px;padding:8px 10px;background:#1E293B;border-radius:6px;opacity:.5"><span style="color:#475569">○</span><span style="color:#64748B;font-size:.8rem">Share dashboard with your team</span></div>
+              </div>
+            </div>
+            <div style="background:#0F172A;border-radius:8px;padding:12px 14px;border:1px solid #334155;display:flex;align-items:center;gap:10px">
+              <div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#101828,#4a5565);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:.62rem;font-weight:700;color:#fff;letter-spacing:-.3px">AI</div>
+              <p style="color:#E2E8F0;font-size:.78rem;line-height:1.5">You have not created a report yet — it is the fastest way to show your team value. Need help? I can walk you through it.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="reveal" style="margin-bottom:40px">
+      <h3 style="margin-bottom:16px;color:var(--g900)">Automated Email Sequences by Segment</h3>
+      <div class="tab-row">
+        <button class="tab-btn active" onclick="showTab('email','smb')">SMB Sequence</button>
+        <button class="tab-btn" onclick="showTab('email','ent')">Enterprise Sequence</button>
+      </div>
+      <div id="email-smb" class="tab-panel active">
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div class="card" style="border-left:4px solid var(--amber)">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px"><strong style="font-size:.9rem">Day 1 — Welcome (Automated)</strong><span class="badge b-amber">Automated</span></div>
+            <div class="tpl-box" style="margin-top:0"><p><strong>Subject:</strong> Welcome to [Product] — your first win is 10 minutes away<br><br>Hi [First Name], you are in. Here is what to do in the next 10 minutes: [3-step setup link]. The average [Segment] customer gets their first result in 6 days. You have got this.<br><em style="color:var(--g400)">— The [Product] Team</em></p></div>
+          </div>
+          <div class="card" style="border-left:4px solid var(--amber)">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px"><strong style="font-size:.9rem">Day 3 — Nudge if setup incomplete (Conditional)</strong><span class="badge b-amber">Conditional</span></div>
+            <div class="tpl-box" style="margin-top:0"><p><strong>Subject:</strong> You are 2 steps away from [key feature]<br><br>Hi [First Name], quick check — it looks like you have not connected [Data Source] yet. That is the step that unlocks [feature]. It takes 4 minutes: [link]. If you hit a snag, just reply here — I am a human.</p></div>
+          </div>
+          <div class="card" style="border-left:4px solid var(--amber)">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px"><strong style="font-size:.9rem">Day 7 — First value confirmation (Triggered on use)</strong><span class="badge b-green">Triggered</span></div>
+            <div class="tpl-box" style="margin-top:0"><p><strong>Subject:</strong> You just did the thing<br><br>Hi [First Name] — [Product] just processed your first result. Congrats. Here is what other [Company Size] teams do next: [3 suggested next steps]. Join our next group Q&amp;A: [Calendly link].</p></div>
+          </div>
+        </div>
+      </div>
+      <div id="email-ent" class="tab-panel">
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div class="card" style="border-left:4px solid var(--teal)">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px"><strong style="font-size:.9rem">Day 1 — Personal welcome from CSM</strong><span class="badge b-teal">CSM sends</span></div>
+            <div class="tpl-box" style="margin-top:0"><p><strong>Subject:</strong> Your dedicated CS team at [Product]<br><br>Hi Sarah — I am Marcus, your dedicated Customer Success Manager. I will be your main point of contact for onboarding, strategy, and anything that comes up.<br><br>I have read through your contract and spoken with your sales rep about your goals. I would love to kick off this week. I have sent a calendar invite for Thursday at 2pm. I will send a short prep doc beforehand so we can skip the basics and get to what matters for your team.</p></div>
+          </div>
+          <div class="card" style="border-left:4px solid var(--teal)">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px"><strong style="font-size:.9rem">Day 5 — Success plan delivered</strong><span class="badge b-teal">Hybrid</span></div>
+            <div class="tpl-box" style="margin-top:0"><p><strong>Subject:</strong> Your 90-day success plan — [Company Name]<br><br>Hi Sarah — as promised, here is your custom success plan based on our kickoff call: [Notion link]. It outlines your 30/60/90-day milestones, who owns what, and how we will measure success. The engineering team will need to complete the integration by next Friday to stay on track.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="key-takeaway reveal"><span class="kt-icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="10,2 18,10 10,18 2,10"/></svg></span><div class="kt-body"><h4>Key Takeaway</h4><p>The goal of future-state onboarding is not to remove the human — it is to make sure the human shows up at the right moment, with the right context, for the right customer. Automate the predictable. Reserve the CSM for the unpredictable.</p></div></div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer style="background:var(--g900);color:#fff;padding:48px 0 32px">
+  <div class="container">
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin-bottom:36px">
+      <div>
+        <div style="font-weight:800;font-size:1.1rem;color:#fff;margin-bottom:10px"><span class="logo-badge">CS</span> Playbook</div>
+        <p style="font-size:.84rem;color:#94A3B8;line-height:1.7">A practitioner-built guide to customer success — from the messy startup phase to the AI-powered future.</p>
+      </div>
+      <div>
+        <div style="font-weight:700;font-size:.84rem;color:#94A3B8;text-transform:uppercase;letter-spacing:.08em;margin-bottom:14px">Main Guide</div>
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <a href="index.html#foundation" style="color:#CBD5E1;font-size:.84rem" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#CBD5E1'">The Foundation</a>
+          <a href="index.html#current" style="color:#CBD5E1;font-size:.84rem" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#CBD5E1'">Startup Phase</a>
+          <a href="index.html#transition" style="color:#CBD5E1;font-size:.84rem" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#CBD5E1'">Scaling Up</a>
+          <a href="index.html#ai-future" style="color:#CBD5E1;font-size:.84rem" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#CBD5E1'">AI Future</a>
+        </div>
+      </div>
+      <div>
+        <div style="font-weight:700;font-size:.84rem;color:#94A3B8;text-transform:uppercase;letter-spacing:.08em;margin-bottom:14px">Workflow &amp; Resources</div>
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <a href="onboarding.html" style="color:#fff;font-size:.84rem;font-weight:600">Onboarding</a>
+          <a href="playbooks.html" style="color:#CBD5E1;font-size:.84rem" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#CBD5E1'">Playbooks</a>
+          <a href="feedback.html" style="color:#CBD5E1;font-size:.84rem" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#CBD5E1'">Feedback Loop</a>
+        </div>
+      </div>
+    </div>
+    <div style="border-top:1px solid #1F2937;padding-top:20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
+      <p style="color:#4B5563;font-size:.8rem">Built for CS practitioners. Use it, adapt it, share it.</p>
+      <a href="index.html" style="color:#94A3B8;font-size:.84rem;font-weight:600">← Back to main guide</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+function toggleMobile() {
+  document.getElementById('mobile-menu').classList.toggle('open');
+}
+function toggleDropdown() {
+  document.querySelector('.nav-dropdown').classList.toggle('open');
+}
+document.addEventListener('click', function(e) {
+  if (!e.target.closest('.nav-dropdown')) {
+    var d = document.querySelector('.nav-dropdown');
+    if (d) d.classList.remove('open');
+  }
+});
+function showTab(group, id) {
+  document.querySelectorAll('[id^="' + group + '-"]').forEach(function(p) { p.classList.remove('active'); });
+  var t = document.getElementById(group + '-' + id);
+  if (t) t.classList.add('active');
+  document.querySelectorAll('.tab-btn').forEach(function(btn) {
+    if (btn.getAttribute('onclick') && btn.getAttribute('onclick').indexOf("'" + group + "'") !== -1) {
+      btn.classList.toggle('active', btn.getAttribute('onclick').indexOf("'" + id + "'") !== -1);
+    }
+  });
+}
+(function() {
+  if (!window.IntersectionObserver) return;
+  var obs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(function(el) { obs.observe(el); });
+})();
+</script>
+</body>
+</html>
