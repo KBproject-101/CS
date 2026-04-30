@@ -113,6 +113,36 @@ nav{position:sticky;top:0;z-index:1000;background:rgba(255,255,255,.96);backdrop
 .reveal.visible{opacity:1;transform:translateY(0)}
 .d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}
 
+/* ─── HEALTH CHECK QUIZ ─── */
+#quiz-section{background:#fff;padding:56px 0}
+.quiz-wrap{max-width:860px;margin:0 auto;padding:0 24px;display:grid;grid-template-columns:1fr 1.6fr}
+.quiz-left{padding:40px 36px;border:1.5px solid var(--g200);border-right:none;border-radius:var(--rl) 0 0 var(--rl);background:var(--g50);display:flex;flex-direction:column;justify-content:center}
+.quiz-right{padding:40px 36px;border:1.5px solid var(--g200);border-radius:0 var(--rl) var(--rl) 0;background:#fff}
+.quiz-header{margin-bottom:28px}
+.quiz-header h2{font-size:1.35rem;font-weight:700;color:var(--g900);margin-bottom:8px}
+.quiz-header p{font-size:.9rem;color:var(--g500);line-height:1.55}
+.quiz-progress{display:flex;gap:6px;margin-top:4px}
+.quiz-dot{width:8px;height:8px;border-radius:50%;background:var(--g200);transition:all .3s}
+.quiz-dot.active{background:var(--g900);width:22px;border-radius:4px}
+.quiz-dot.done{background:var(--g500)}
+.quiz-step{animation:quizFadeIn .35s ease both}
+@keyframes quizFadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.quiz-question{font-size:1rem;font-weight:600;color:var(--g900);margin-bottom:18px}
+.quiz-options{display:flex;flex-direction:column;gap:9px}
+.quiz-option{display:flex;align-items:center;gap:13px;background:var(--g50);border:1.5px solid var(--g200);border-radius:var(--r);padding:14px 18px;cursor:pointer;transition:all .2s;text-align:left;width:100%;font-family:inherit}
+.quiz-option:hover{border-color:var(--g700);background:#fff;box-shadow:var(--sh)}
+.quiz-option-icon{flex-shrink:0;color:var(--g600);display:flex;align-items:center}
+.quiz-option:hover .quiz-option-icon{color:var(--g900)}
+.quiz-option-text{font-size:.9rem;font-weight:500;color:var(--g800)}
+.quiz-result{animation:quizFadeIn .4s ease both}
+.quiz-result-verdict{font-size:1.1rem;font-weight:700;color:var(--g900);margin-bottom:10px;line-height:1.4}
+.quiz-result-sub{font-size:.875rem;color:var(--g500);margin-bottom:24px;line-height:1.55}
+.quiz-result-cta{display:inline-flex;align-items:center;gap:8px;background:var(--g900);color:#fff;padding:12px 22px;border-radius:10px;font-size:.9rem;font-weight:600;text-decoration:none;transition:all .2s;margin-bottom:16px}
+.quiz-result-cta:hover{background:var(--g700);transform:translateY(-2px);box-shadow:0 6px 20px rgba(16,24,40,.25)}
+.quiz-restart{display:block;font-size:.8rem;color:var(--g400);cursor:pointer;background:none;border:none;font-family:inherit;transition:color .2s;padding:0}
+.quiz-restart:hover{color:var(--g700)}
+@media(max-width:640px){.quiz-wrap{grid-template-columns:1fr}.quiz-left{border-right:1.5px solid var(--g200);border-bottom:none;border-radius:var(--rl) var(--rl) 0 0}.quiz-right{border-radius:0 0 var(--rl) var(--rl)}.quiz-left,.quiz-right{padding:28px 24px}.quiz-progress{justify-content:flex-start}}
+
 /* ─── 2. FOUNDATION ─── */
 #foundation{background:var(--g50)}
 .tab-row{display:flex;gap:4px;background:var(--g100);padding:4px;border-radius:10px;margin-bottom:30px;width:fit-content}
@@ -277,26 +307,25 @@ input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.2)}
       <a href="#current" class="btn btn-secondary">View Current State →</a>
       <a href="#ai-future" class="btn btn-secondary">See the Future State →</a>
     </div>
-    <div class="stage-box">
-      <div class="stage-box-label">THE growth journey</div>
-      <div class="stage-track">
-        <div class="stage-fill" id="stage-fill" style="width:16%"></div>
-        <div class="stage-node" onclick="setStage(0)">
-          <div class="stage-dot active" id="sd0">S</div>
-          <div class="stage-lbl active" id="sl0">Startup</div>
-          <div class="stage-sub">0–$1M ARR</div>
-        </div>
-        <div class="stage-node" onclick="setStage(1)">
-          <div class="stage-dot" id="sd1">G</div>
-          <div class="stage-lbl" id="sl1">Growth</div>
-          <div class="stage-sub">$1M–$5M ARR</div>
-        </div>
-        <div class="stage-node" onclick="setStage(2)">
-          <div class="stage-dot" id="sd2">E</div>
-          <div class="stage-lbl" id="sl2">Scale</div>
-          <div class="stage-sub">$5M+ ARR</div>
-        </div>
+  </div>
+</section>
+
+<!-- ═══ CS HEALTH CHECK QUIZ ═══ -->
+<section id="quiz-section">
+  <div class="quiz-wrap">
+    <div class="quiz-left">
+      <div class="quiz-header">
+        <h2>CS Health Check</h2>
+        <p>3 quick questions to find your starting point</p>
       </div>
+      <div class="quiz-progress" id="quiz-progress">
+        <div class="quiz-dot active" id="qd0"></div>
+        <div class="quiz-dot" id="qd1"></div>
+        <div class="quiz-dot" id="qd2"></div>
+      </div>
+    </div>
+    <div class="quiz-right">
+      <div id="quiz-body"></div>
     </div>
   </div>
 </section>
@@ -421,7 +450,7 @@ input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.2)}
   <div class="container">
     <div class="section-head reveal">
       <span class="section-lbl lbl-amber">Startup Phase</span>
-      <h2>The Honest Picture of Early-Stage CS</h2>
+      <h2>Early-Stage CS</h2>
       <p>One CSM owns everything: onboarding, renewals, QBRs, escalations, and product feedback. Playbooks live in someone's head, monitoring is gut-feel — and that's exactly where the most important learning happens.</p>
     </div>
     <div class="reveal" style="margin-bottom:40px">
@@ -816,7 +845,7 @@ input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.2)}
     <div style="display:grid;grid-template-columns:2fr 1fr;gap:22px;margin-bottom:36px">
       <div>
         <div style="font-weight:800;font-size:1.1rem;color:#fff;margin-bottom:10px"><span class="logo-badge">CS</span> Playbook</div>
-        <p style="font-size:.84rem;color:#fff;line-height:1.7">A practitioner-built guide to customer success — from the messy startup phase to the AI-powered future. Not a brochure. A working playbook.</p>
+        <p style="font-size:.84rem;color:#fff;line-height:1.7">A practitioner-built guide to customer success — from the messy startup phase to the AI-powered future.<br>Not a brochure. A working playbook.</p>
       </div>
       <div>
         <div style="font-weight:700;font-size:.84rem;color:#fff;text-transform:uppercase;letter-spacing:.08em;margin-bottom:14px">Customer Success Stages</div>
@@ -833,6 +862,90 @@ input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.2)}
     </div>
   </div>
 </footer>
+
+<script>
+// ─── CS HEALTH CHECK QUIZ ───
+var quizAnswers = [];
+var quizIcons = {
+  person: '<svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="9" cy="6" r="3"/><path d="M2 17c0-3.9 3.1-7 7-7s7 3.1 7 7"/></svg>',
+  team:   '<svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="6.5" cy="6" r="2.5"/><path d="M1 17c0-3.3 2.7-6 5.5-6s5.5 2.7 5.5 6"/><circle cx="13" cy="5.5" r="2"/><path d="M13 11.5c1.9 0 4 1.2 4 4"/></svg>',
+  building: '<svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="4" width="12" height="13" rx="1"/><polyline points="6,17 6,10 12,10 12,17"/><line x1="6" y1="7" x2="8" y2="7"/><line x1="10" y1="7" x2="12" y2="7"/></svg>',
+  churn:  '<svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M9 3v9"/><polyline points="5,8 9,12 13,8"/><line x1="4" y1="15" x2="14" y2="15"/></svg>',
+  chaos:  '<svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 13l3-6 3 4 3-6 3 4"/></svg>',
+  eye:    '<svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M1.5 9c2-4 3.8-5.5 7.5-5.5S14.5 5 16.5 9c-2 4-3.8 5.5-7.5 5.5S3.5 13 1.5 9z"/><circle cx="9" cy="9" r="2.5"/></svg>',
+  question: '<svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M7 7c0-2 1.1-3 2.5-3S12 5.1 12 6.4c0 1.2-.8 1.9-2 2.7-.4.3-.5.9-.5 1.4"/><circle cx="9.5" cy="13.5" r=".75" fill="currentColor" stroke="none"/></svg>',
+  doc:    '<svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="2" width="12" height="14" rx="1.5"/><line x1="6" y1="6" x2="12" y2="6"/><line x1="6" y1="9" x2="12" y2="9"/><line x1="6" y1="12" x2="9" y2="12"/></svg>',
+  gear:   '<svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="9" cy="9" r="2.5"/><path d="M9 1.5v2M9 14.5v2M1.5 9h2M14.5 9h2M3.6 3.6l1.4 1.4M13 13l1.4 1.4M3.6 14.4l1.4-1.4M13 5l1.4-1.4"/></svg>'
+};
+var quizQuestions = [
+  {
+    q: 'Where are you right now?',
+    opts: [
+      { icon: 'person',   text: 'Just hired our first CSM' },
+      { icon: 'team',     text: 'Have a small CS team, figuring out scale' },
+      { icon: 'building', text: 'Leading CS at a growth-stage company' }
+    ]
+  },
+  {
+    q: "What's your biggest headache today?",
+    opts: [
+      { icon: 'churn', text: "Churn — we're losing accounts we shouldn't" },
+      { icon: 'chaos', text: 'Chaos — no repeatable process yet' },
+      { icon: 'eye',   text: "Visibility — I can't see what's working" }
+    ]
+  },
+  {
+    q: 'How structured is your CS motion?',
+    opts: [
+      { icon: 'question', text: 'We wing it per account' },
+      { icon: 'doc',      text: 'Some playbooks, inconsistently followed' },
+      { icon: 'gear',     text: 'Mostly systematized but gaps remain' }
+    ]
+  }
+];
+
+function quizResult() {
+  var q1 = quizAnswers[0], q3 = quizAnswers[2];
+  if (q1 === 0) return { verdict: "You're in early Startup mode — your foundation isn't set yet.", sub: 'Start with the fundamentals before layering in process.', href: '#foundation', cta: 'Go to Foundation →' };
+  if (q1 === 1 && (q3 === 0 || q3 === 1)) return { verdict: 'You have momentum but no system. Time to build repeatable plays.', sub: "You're moving fast — now make it repeatable.", href: '#current', cta: 'Go to Startup Phase →' };
+  if (q1 === 1 && q3 === 2) return { verdict: "You're ready to scale. Focus on delegation and visibility.", sub: "Your foundation is there — now build for what's next.", href: '#transition', cta: 'Go to Scaling Up →' };
+  return { verdict: "You're scaling faster than your systems. Time to systematize.", sub: 'Great growth, but your infrastructure needs to catch up.', href: '#transition', cta: 'Go to Scaling Up →' };
+}
+
+function quizRender(step) {
+  var body = document.getElementById('quiz-body');
+  for (var i = 0; i < 3; i++) {
+    var d = document.getElementById('qd' + i);
+    if (i < step) { d.className = 'quiz-dot done'; }
+    else if (i === step && step < 3) { d.className = 'quiz-dot active'; }
+    else { d.className = 'quiz-dot'; }
+  }
+  if (step < 3) {
+    var q = quizQuestions[step];
+    var html = '<div class="quiz-step"><div class="quiz-question">' + q.q + '</div><div class="quiz-options">';
+    q.opts.forEach(function(o, i) {
+      html += '<button class="quiz-option" onclick="quizPick(' + step + ',' + i + ')"><span class="quiz-option-icon">' + quizIcons[o.icon] + '</span><span class="quiz-option-text">' + o.text + '</span></button>';
+    });
+    html += '</div></div>';
+    body.innerHTML = html;
+  } else {
+    var r = quizResult();
+    body.innerHTML = '<div class="quiz-result"><div class="quiz-result-verdict">' + r.verdict + '</div><div class="quiz-result-sub">' + r.sub + '</div><a href="' + r.href + '" class="quiz-result-cta">' + r.cta + '</a><button class="quiz-restart" onclick="quizRestart()">↩ Start over</button></div>';
+  }
+}
+
+function quizPick(step, idx) {
+  quizAnswers[step] = idx;
+  quizRender(step + 1);
+}
+
+function quizRestart() {
+  quizAnswers = [];
+  quizRender(0);
+}
+
+quizRender(0);
+</script>
 
 <script>
 // ─── OPERATING RHYTHM CAROUSEL ───
