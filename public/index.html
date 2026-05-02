@@ -30,7 +30,7 @@ p{color:var(--g600)}
 a{color:inherit;text-decoration:none}
 .container{max-width:1180px;margin:0 auto;padding:0 24px}
 section{padding:48px 0}
-#foundation{border-top:2px solid var(--g300)}
+#foundation{}
 #current{border-top:2px solid var(--g300)}
 #transition{border-top:2px solid var(--g300)}
 
@@ -116,9 +116,9 @@ nav{position:sticky;top:0;z-index:1000;background:rgba(255,255,255,.96);backdrop
 /* ─── HEALTH CHECK QUIZ ─── */
 #quiz-section{background:#fff;padding:56px 0}
 .quiz-wrap{max-width:860px;margin:0 auto;padding:0 24px;display:grid;grid-template-columns:1fr 1.6fr}
-.quiz-left{padding:40px 36px;border:1.5px solid var(--g200);border-right:none;border-radius:var(--rl) 0 0 var(--rl);background:var(--g50);display:flex;flex-direction:column;justify-content:center}
-.quiz-right{padding:40px 36px;border:1.5px solid var(--g200);border-radius:0 var(--rl) var(--rl) 0;background:#fff}
-.quiz-header{margin-bottom:28px}
+.quiz-left{padding:22px 32px;border:1.5px solid var(--g200);border-right:none;border-radius:var(--rl) 0 0 var(--rl);background:var(--g50);display:flex;flex-direction:column;justify-content:center}
+.quiz-right{padding:22px 32px;border:1.5px solid var(--g200);border-radius:0 var(--rl) var(--rl) 0;background:#fff}
+.quiz-header{margin-bottom:16px}
 .quiz-header h2{font-size:1.35rem;font-weight:700;color:var(--g900);margin-bottom:8px}
 .quiz-header p{font-size:.9rem;color:var(--g500);line-height:1.55}
 .quiz-progress{display:flex;gap:6px;margin-top:4px}
@@ -338,9 +338,9 @@ input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.2)}
       <h2>Always Relevant</h2>
       <p>These three pillars don't change as you scale — only their complexity does.<br>Get these right first.</p>
       <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:22px">
-        <a href="#pillar-segmentation" class="btn btn-secondary" style="font-size:.8125rem;padding:9px 18px;border-radius:8px;min-width:220px;justify-content:center"><span style="background:var(--g900);color:#fff;padding:3px 8px;border-radius:6px;font-size:.72rem;font-weight:800;letter-spacing:.06em;line-height:1;margin-right:10px">01</span>Customer Segmentation</a>
-        <a href="#pillar-health" class="btn btn-secondary" style="font-size:.8125rem;padding:9px 18px;border-radius:8px;min-width:220px;justify-content:center"><span style="background:var(--g900);color:#fff;padding:3px 8px;border-radius:6px;font-size:.72rem;font-weight:800;letter-spacing:.06em;line-height:1;margin-right:10px">02</span>Health Scoring</a>
-        <a href="#pillar-metrics" class="btn btn-secondary" style="font-size:.8125rem;padding:9px 18px;border-radius:8px;min-width:220px;justify-content:center"><span style="background:var(--g900);color:#fff;padding:3px 8px;border-radius:6px;font-size:.72rem;font-weight:800;letter-spacing:.06em;line-height:1;margin-right:10px">03</span>Core Metrics</a>
+        <a href="#pillar-segmentation" class="btn btn-secondary" style="font-size:.8125rem;padding:9px 18px;border-radius:8px;width:255px;white-space:nowrap;justify-content:center"><span style="background:var(--g900);color:#fff;padding:3px 8px;border-radius:6px;font-size:.72rem;font-weight:800;letter-spacing:.06em;line-height:1;margin-right:10px">01</span>Customer Segmentation</a>
+        <a href="#pillar-health" class="btn btn-secondary" style="font-size:.8125rem;padding:9px 18px;border-radius:8px;width:255px;white-space:nowrap;justify-content:center"><span style="background:var(--g900);color:#fff;padding:3px 8px;border-radius:6px;font-size:.72rem;font-weight:800;letter-spacing:.06em;line-height:1;margin-right:10px">02</span>Health Scoring</a>
+        <a href="#pillar-metrics" class="btn btn-secondary" style="font-size:.8125rem;padding:9px 18px;border-radius:8px;width:255px;white-space:nowrap;justify-content:center"><span style="background:var(--g900);color:#fff;padding:3px 8px;border-radius:6px;font-size:.72rem;font-weight:800;letter-spacing:.06em;line-height:1;margin-right:10px">03</span>Core Metrics</a>
       </div>
     </div>
 
@@ -441,7 +441,7 @@ input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.2)}
         <div class="metric-card"><div class="metric-val" style="color:#000000">42</div><div class="metric-lbl">NPS Score</div><div class="metric-track"><div class="metric-fill" style="width:62%;background:var(--green)"></div></div><div class="metric-target">Target: &gt;40 · SaaS average: 36</div></div>
       </div>
     </div>
-    <div class="key-takeaway reveal"><div class="kt-body"><h4>Key Takeaway</h4><p>GRR tells you if you're bleeding. NRR tells you if your existing customers believe in you enough to give you more money. If NRR is above 100%, you can grow revenue even with zero new sales. That's the goal.</p></div></div>
+    <div class="key-takeaway reveal"><div class="kt-body"><h4>Key Takeaway</h4><p>GRR tells you if you're bleeding. NRR tells you if your existing customers believe in you enough to give you more money. If NRR is above 100%, you can grow revenue even with zero new sales. That's a strong signal.</p></div></div>
   </div>
 </section>
 
@@ -451,7 +451,7 @@ input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.2)}
     <div class="section-head reveal">
       <span class="section-lbl lbl-amber">Startup Phase</span>
       <h2>Early-Stage CS</h2>
-      <p>One CSM owns everything: onboarding, renewals, QBRs, escalations, and product feedback. Playbooks live in someone's head, monitoring is gut-feel — and that's exactly where the most important learning happens.</p>
+      <p>One CSM (or Founder) owns everything: onboarding, renewals, QBRs, escalations, and product feedback. Playbooks live in someone's head, monitoring is gut-feel —<br>and that's where a lot of important learning happens.</p>
     </div>
     <div class="reveal" style="margin-bottom:40px">
 
@@ -480,8 +480,8 @@ input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.2)}
           <div style="display:flex;flex-direction:column;gap:6px">
             <div style="background:#fff;border:1px solid var(--g100);border-radius:8px;padding:9px 12px"><div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:2px"><div style="font-size:.875rem;font-weight:600;color:var(--g900)">Triage Slack + email</div><span style="background:#FEF3C7;color:#D97706;font-size:.65rem;font-weight:600;padding:2px 7px;border-radius:100px;flex-shrink:0">inbox</span></div><div style="font-size:.78rem;color:var(--g500);line-height:1.4">3 login issues, 1 sales escalation, 1 billing question</div></div>
             <div style="background:#fff;border:1px solid var(--g100);border-radius:8px;padding:9px 12px"><div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:2px"><div style="font-size:.875rem;font-weight:600;color:var(--g900)">Support escalation</div><span style="background:#FEF3C7;color:#D97706;font-size:.65rem;font-weight:600;padding:2px 7px;border-radius:100px;flex-shrink:0">bug</span></div><div style="font-size:.78rem;color:var(--g500);line-height:1.4">CSV import bug. You're the bridge between customer and eng</div></div>
-            <div style="background:#fff;border:1px solid var(--g100);border-radius:8px;padding:9px 12px"><div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:2px"><div style="font-size:.875rem;font-weight:600;color:var(--g900)">Angry customer call</div><span style="background:#FEF3C7;color:#D97706;font-size:.65rem;font-weight:600;padding:2px 7px;border-radius:100px;flex-shrink:0">churn risk</span></div><div style="font-size:.78rem;color:var(--g500);line-height:1.4">Delta Co NPS detractor. Feature didn't ship. 45 min</div></div>
-            <div style="background:#fff;border:1px solid var(--g100);border-radius:8px;padding:9px 12px"><div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:2px"><div style="font-size:.875rem;font-weight:600;color:var(--g900)">Product feedback thread</div><span style="background:#FEF3C7;color:#D97706;font-size:.65rem;font-weight:600;padding:2px 7px;border-radius:100px;flex-shrink:0">signal</span></div><div style="font-size:.78rem;color:var(--g500);line-height:1.4">Same missing feature, 3 customers. Compiling for PM</div></div>
+            <div style="background:#fff;border:1px solid var(--g100);border-radius:8px;padding:9px 12px"><div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:2px"><div style="font-size:.875rem;font-weight:600;color:var(--g900)">Angry customer call</div><span style="background:#FEF3C7;color:#D97706;font-size:.65rem;font-weight:600;padding:2px 7px;border-radius:100px;flex-shrink:0">churn risk</span></div><div style="font-size:.78rem;color:var(--g500);line-height:1.4">ABC Corp NPS detractor. Feature didn't ship as expected</div></div>
+            <div style="background:#fff;border:1px solid var(--g100);border-radius:8px;padding:9px 12px"><div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:2px"><div style="font-size:.875rem;font-weight:600;color:var(--g900)">Product feedback</div><span style="background:#FEF3C7;color:#D97706;font-size:.65rem;font-weight:600;padding:2px 7px;border-radius:100px;flex-shrink:0">signal</span></div><div style="font-size:.78rem;color:var(--g500);line-height:1.4">Feature not working, 3 customers reach out</div></div>
           </div>
         </div>
 
@@ -489,8 +489,8 @@ input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.2)}
         <div style="grid-column:3;grid-row:2">
           <div style="font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#10B981;margin-bottom:10px">Proactive</div>
           <div style="display:flex;flex-direction:column;gap:6px">
-            <div style="background:#fff;border:1px solid var(--g100);border-radius:8px;padding:9px 12px"><div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:2px"><div style="font-size:.875rem;font-weight:600;color:var(--g900)">New customer kickoff</div><span style="background:#D1FAE5;color:#059669;font-size:.65rem;font-weight:600;padding:2px 7px;border-radius:100px;flex-shrink:0">onboarding</span></div><div style="font-size:.78rem;color:var(--g500);line-height:1.4">Atlas Corp. Walk product, set 30/60/90 goals</div></div>
-            <div style="background:#fff;border:1px solid var(--g100);border-radius:8px;padding:9px 12px"><div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:2px"><div style="font-size:.875rem;font-weight:600;color:var(--g900)">QBR prep — Orbit Tech</div><span style="background:#D1FAE5;color:#059669;font-size:.65rem;font-weight:600;padding:2px 7px;border-radius:100px;flex-shrink:0">expansion</span></div><div style="font-size:.78rem;color:var(--g500);line-height:1.4">Pull usage data, build deck, draft success metrics</div></div>
+            <div style="background:#fff;border:1px solid var(--g100);border-radius:8px;padding:9px 12px"><div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:2px"><div style="font-size:.875rem;font-weight:600;color:var(--g900)">New customer kickoff</div><span style="background:#D1FAE5;color:#059669;font-size:.65rem;font-weight:600;padding:2px 7px;border-radius:100px;flex-shrink:0">onboarding</span></div><div style="font-size:.78rem;color:var(--g500);line-height:1.4">Global Corp. Walk through setup and product, align on 30/60/90 goals</div></div>
+            <div style="background:#fff;border:1px solid var(--g100);border-radius:8px;padding:9px 12px"><div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:2px"><div style="font-size:.875rem;font-weight:600;color:var(--g900)">QBR prep</div><span style="background:#D1FAE5;color:#059669;font-size:.65rem;font-weight:600;padding:2px 7px;border-radius:100px;flex-shrink:0">expansion</span></div><div style="font-size:.78rem;color:var(--g500);line-height:1.4">Pull usage data, build deck, draft success metrics</div></div>
             <div style="background:#fff;border:1px solid var(--g100);border-radius:8px;padding:9px 12px"><div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:2px"><div style="font-size:.875rem;font-weight:600;color:var(--g900)">Weekly digest</div><span style="background:#D1FAE5;color:#059669;font-size:.65rem;font-weight:600;padding:2px 7px;border-radius:100px;flex-shrink:0">outreach</span></div><div style="font-size:.78rem;color:var(--g500);line-height:1.4">Email to 8 at-risk accounts: tips, updates, open Qs</div></div>
           </div>
         </div>
@@ -558,7 +558,7 @@ input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.2)}
           </div>
           <div id="cov-mm" class="tab-panel">
             <div class="g3">
-              <div class="card" style="padding:13px 16px"><div style="margin-bottom:8px"><svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="11" cy="8" r="3.5"/><path d="M4 19c0-3.9 3.1-7 7-7s7 3.1 7 7"/></svg></div><h4>Onboarding</h4><p style="font-size:.84rem;margin-top:6px">Dedicated kickoff call within 48h of signing. Shared project plan in Notion or Google Doc. Weekly check-ins for first 60 days. Introduction to champion and exec sponsor in week one.</p></div>
+              <div class="card" style="padding:13px 16px"><div style="margin-bottom:8px"><svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="11" cy="8" r="3.5"/><path d="M4 19c0-3.9 3.1-7 7-7s7 3.1 7 7"/></svg></div><h4>Onboarding</h4><p style="font-size:.84rem;margin-top:6px">Dedicated kickoff call within 48h of signing. Shared project plan in Notion. Weekly check-ins for first 60 days. Introduction to champion and exec sponsor in week one.</p></div>
               <div class="card" style="padding:13px 16px"><div style="margin-bottom:8px"><svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="5" y="4" width="12" height="15" rx="2"/><line x1="8" y1="9" x2="14" y2="9"/><line x1="8" y1="13" x2="14" y2="13"/><line x1="8" y1="17" x2="11" y2="17"/></svg></div><h4>Ongoing Engagement</h4><p style="font-size:.84rem;margin-top:6px">Quarterly business reviews. Assigned CSM reachable via Slack or email. Monthly usage digest auto-sent to champion. Product feedback routed through CSM to product team.</p></div>
               <div class="card" style="padding:13px 16px"><div style="margin-bottom:8px"><svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="4,16 9,10 13,13 18,6"/><polyline points="14,6 18,6 18,10"/></svg></div><h4>Renewal Motion</h4><p style="font-size:.84rem;margin-top:6px">90 days out: CSM prepares renewal deck with ROI evidence. 60 days: formal renewal conversation. 30 days: procurement involvement. Target NRR improvement via upsell discussion.</p></div>
             </div>
@@ -650,13 +650,13 @@ input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.2)}
     </div>
 
 
-    <div class="key-takeaway reveal"><div class="kt-body"><h4>Key Takeaway</h4><p>The goal isn't a perfect process — it's a process good enough that your best CSMs don't need it, and your newest CSMs can rely on it. Document the 20% of situations that cause 80% of the confusion. Leave the rest to judgment.</p></div></div>
+    <div class="key-takeaway reveal"><div class="kt-body"><h4>Key Takeaway</h4><p>The goal isn't a perfect process — it's a process good enough that your best CSMs don't need it, and your team can rely on it. Document the 20% of situations that cause 80% of the confusion.</p></div></div>
   </div>
 </section>
 
 <!-- ═══ 5. FEEDBACK LOOP ═══ -->
 <!-- ═══ 7. AI FUTURE STATE ═══ -->
-<section id="ai-future" style="background:#f0f4ff;color:#1e1b4b;border-top:2px solid var(--g300)">
+<section id="ai-future" style="background:#eef1f8;color:#1e1b4b;border-top:2px solid var(--g300)">
   <div class="container">
     <div class="section-head reveal" style="max-width:680px;margin:0 auto 24px">
       <span class="section-lbl">AI FUTURE</span>
@@ -666,15 +666,15 @@ input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.2)}
 
     <!-- AI ratio visual -->
     <div class="reveal" style="margin-bottom:32px">
-      <div style="background:#dde4ff;border:1px solid rgba(99,102,241,.2);border-radius:var(--rl);padding:32px;text-align:center;box-shadow:0 4px 6px rgba(67,56,202,.07),0 1px 3px rgba(67,56,202,.05)">
-        <p style="color:#4338ca;font-size:.8rem;text-transform:uppercase;letter-spacing:.1em;font-weight:700;margin-bottom:20px">The Lean Team Equation</p>
+      <div style="background:#d6e0ef;border:1px solid rgba(16,24,40,.18);border-radius:var(--rl);padding:32px;text-align:center;box-shadow:0 4px 6px rgba(16,24,40,.07),0 1px 3px rgba(16,24,40,.05)">
+        <p style="color:#1a3a5c;font-size:.8rem;text-transform:uppercase;letter-spacing:.1em;font-weight:700;margin-bottom:20px">The Lean Team Equation</p>
         <div style="display:flex;align-items:center;justify-content:center;gap:40px;flex-wrap:wrap">
           <div style="text-align:center">
             <div style="font-size:3.5rem;font-weight:900;color:#1e1b4b;line-height:1">1:40</div>
             <div style="color:#4b5563;font-size:.84rem;margin-top:6px">Without AI tools</div>
             <div style="color:#6b7280;font-size:.75rem;margin-top:3px">1 CSM per 40 customers</div>
           </div>
-          <div style="font-size:2rem;color:#a5b4fc">→</div>
+          <div style="font-size:2rem;color:#7a9abb">→</div>
           <div style="text-align:center">
             <div style="font-size:3.5rem;font-weight:900;color:#1e1b4b;line-height:1">1:150</div>
             <div style="color:#4b5563;font-size:.84rem;margin-top:6px">With AI-scaled tools</div>
@@ -691,42 +691,42 @@ input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.2)}
       <p style="color:#4b5563;font-size:.9rem;margin-bottom:24px">Trained on your help docs, past support tickets, and product changelog. Escalates to human when needed.</p>
       <div class="g2">
         <div style="display:flex;flex-direction:column;height:100%">
-          <div style="background:#dde4ff;border-radius:12px;overflow:hidden;border:1px solid rgba(99,102,241,.2);box-shadow:0 4px 6px rgba(67,56,202,.07),0 1px 3px rgba(67,56,202,.05);display:flex;flex-direction:column;height:100%">
-            <div style="background:rgba(99,102,241,.12);padding:12px 16px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(99,102,241,.15)">
+          <div style="background:#d6e0ef;border-radius:12px;overflow:hidden;border:1px solid rgba(16,24,40,.18);box-shadow:0 4px 6px rgba(16,24,40,.07),0 1px 3px rgba(16,24,40,.05);display:flex;flex-direction:column;height:100%">
+            <div style="background:rgba(16,24,40,.08);padding:12px 16px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(16,24,40,.13)">
               <div style="display:flex;align-items:center;gap:8px">
-                <div style="width:28px;height:28px;border-radius:50%;background:#4338ca;display:flex;align-items:center;justify-content:center;font-size:.6rem;font-weight:700;color:#fff;letter-spacing:-.3px">AI</div>
+                <div style="width:28px;height:28px;border-radius:50%;background:#1a3a5c;display:flex;align-items:center;justify-content:center;font-size:.6rem;font-weight:700;color:#fff;letter-spacing:-.3px">AI</div>
                 <div><div style="color:#1e1b4b;font-size:.84rem;font-weight:600">[Product] Assistant</div><div style="color:#10B981;font-size:.68rem">● Online</div></div>
               </div>
               <span style="color:#6b7280;font-size:.75rem">Minimize</span>
             </div>
             <div style="padding:10px 14px;display:flex;flex-direction:column;gap:8px;flex:1">
               <div style="display:flex;gap:8px;align-items:flex-start">
-                <div style="width:26px;height:26px;border-radius:50%;background:#4338ca;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:.58rem;font-weight:700;color:#fff;letter-spacing:-.3px">AI</div>
-                <div style="background:#fff;border:1px solid rgba(99,102,241,.15);border-radius:0 8px 8px 8px;padding:10px 12px;max-width:75%"><p style="color:#4b5563;font-size:.8rem;line-height:1.55">Hi there! I can help you with how-to questions, find help articles, or connect you with your CSM. What do you need?</p></div>
+                <div style="width:26px;height:26px;border-radius:50%;background:#1a3a5c;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:.58rem;font-weight:700;color:#fff;letter-spacing:-.3px">AI</div>
+                <div style="background:#fff;border:1px solid rgba(16,24,40,.13);border-radius:0 8px 8px 8px;padding:10px 12px;max-width:75%"><p style="color:#4b5563;font-size:.8rem;line-height:1.55">Hi there! I can help you with how-to questions, find help articles, or connect you with your CSM. What do you need?</p></div>
               </div>
               <div style="display:flex;gap:8px;align-items:flex-start;flex-direction:row-reverse">
-                <div style="width:26px;height:26px;border-radius:50%;background:#6366f1;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:.58rem;font-weight:700;color:#fff">U</div>
-                <div style="background:#e0e7ff;border-radius:8px 0 8px 8px;padding:10px 12px;max-width:75%"><p style="color:#1e1b4b;font-size:.8rem;line-height:1.55">How do I export my data to CSV?</p></div>
+                <div style="width:26px;height:26px;border-radius:50%;background:#2c4a6e;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:.58rem;font-weight:700;color:#fff">U</div>
+                <div style="background:#d2dfe9;border-radius:8px 0 8px 8px;padding:10px 12px;max-width:75%"><p style="color:#1e1b4b;font-size:.8rem;line-height:1.55">How do I export my data to CSV?</p></div>
               </div>
               <div style="display:flex;gap:8px;align-items:flex-start">
-                <div style="width:26px;height:26px;border-radius:50%;background:#4338ca;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:.58rem;font-weight:700;color:#fff;letter-spacing:-.3px">AI</div>
-                <div style="background:#fff;border:1px solid rgba(99,102,241,.15);border-radius:0 8px 8px 8px;padding:10px 12px;max-width:85%">
-                  <p style="color:#4b5563;font-size:.8rem;line-height:1.55;margin-bottom:8px">Sure! To export to CSV: go to <span style="color:#4338ca;font-weight:600">Reports → Your Report → Export</span>, then choose CSV. It will download immediately.</p>
+                <div style="width:26px;height:26px;border-radius:50%;background:#1a3a5c;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:.58rem;font-weight:700;color:#fff;letter-spacing:-.3px">AI</div>
+                <div style="background:#fff;border:1px solid rgba(16,24,40,.13);border-radius:0 8px 8px 8px;padding:10px 12px;max-width:85%">
+                  <p style="color:#4b5563;font-size:.8rem;line-height:1.55;margin-bottom:8px">Sure! To export to CSV: go to <span style="color:#1a3a5c;font-weight:600">Reports → Your Report → Export</span>, then choose CSV. It will download immediately.</p>
                   <div style="display:flex;gap:6px;margin-top:8px">
-                    <button style="background:#e0e7ff;border:1px solid rgba(99,102,241,.2);color:#4338ca;font-size:.72rem;padding:4px 10px;border-radius:4px;cursor:pointer">Yes, thanks</button>
-                    <button style="background:#e0e7ff;border:1px solid rgba(99,102,241,.2);color:#4338ca;font-size:.72rem;padding:4px 10px;border-radius:4px;cursor:pointer">Not quite, try again</button>
+                    <button style="background:#d2dfe9;border:1px solid rgba(16,24,40,.18);color:#1a3a5c;font-size:.72rem;padding:4px 10px;border-radius:4px;cursor:pointer">Yes, thanks</button>
+                    <button style="background:#d2dfe9;border:1px solid rgba(16,24,40,.18);color:#1a3a5c;font-size:.72rem;padding:4px 10px;border-radius:4px;cursor:pointer">Not quite, try again</button>
                   </div>
                 </div>
               </div>
             </div>
-            <div style="padding:12px 16px;border-top:1px solid rgba(99,102,241,.15);display:flex;gap:8px">
-              <input type="text" placeholder="Ask anything..." style="flex:1;background:#fff;border:1px solid rgba(99,102,241,.2);border-radius:6px;padding:8px 12px;color:#1e1b4b;font-size:.8rem;outline:none">
-              <button style="background:#4338ca;border:none;color:#fff;padding:8px 12px;border-radius:6px;cursor:pointer;font-size:.8rem">Send</button>
+            <div style="padding:12px 16px;border-top:1px solid rgba(16,24,40,.13);display:flex;gap:8px">
+              <input type="text" placeholder="Ask anything..." style="flex:1;background:#fff;border:1px solid rgba(16,24,40,.18);border-radius:6px;padding:8px 12px;color:#1e1b4b;font-size:.8rem;outline:none">
+              <button style="background:#1a3a5c;border:none;color:#fff;padding:8px 12px;border-radius:6px;cursor:pointer;font-size:.8rem">Send</button>
             </div>
           </div>
         </div>
         <div style="display:flex;flex-direction:column;gap:16px;height:100%">
-          <div style="background:#dde4ff;border:1px solid rgba(99,102,241,.2);border-radius:var(--r);padding:14px 16px;box-shadow:0 4px 6px rgba(67,56,202,.07),0 1px 3px rgba(67,56,202,.05);flex:1">
+          <div style="background:#d6e0ef;border:1px solid rgba(16,24,40,.18);border-radius:var(--r);padding:14px 16px;box-shadow:0 4px 6px rgba(16,24,40,.07),0 1px 3px rgba(16,24,40,.05);flex:1">
             <h4 style="color:#1e1b4b;margin-bottom:10px;font-size:.9rem">What it is trained on</h4>
             <div style="display:flex;gap:16px">
               <div style="flex:1;display:flex;flex-direction:column;gap:7px">
@@ -741,7 +741,7 @@ input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.2)}
               </div>
             </div>
           </div>
-          <div style="background:#dde4ff;border:1px solid rgba(99,102,241,.2);border-radius:var(--r);padding:14px 16px;box-shadow:0 4px 6px rgba(67,56,202,.07),0 1px 3px rgba(67,56,202,.05);flex:1">
+          <div style="background:#d6e0ef;border:1px solid rgba(16,24,40,.18);border-radius:var(--r);padding:14px 16px;box-shadow:0 4px 6px rgba(16,24,40,.07),0 1px 3px rgba(16,24,40,.05);flex:1">
             <h4 style="color:#1e1b4b;margin-bottom:12px;font-size:.9rem">Escalation Decision Tree</h4>
             <div style="font-size:.8rem;color:#4b5563;line-height:1.8">
               <span style="color:#1e1b4b;font-weight:700">Bot handles:</span> how-to questions, feature lookups, status checks, basic troubleshooting<br>
@@ -761,32 +761,32 @@ input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.2)}
           <div id="aitools-slides" style="display:flex;transition:transform .4s ease">
             <!-- Slide 1 -->
             <div style="min-width:100%;display:flex;gap:16px">
-              <div style="flex:1;background:#dde4ff;border:1px solid rgba(99,102,241,.2);border-radius:var(--r);padding:22px;box-shadow:0 4px 6px rgba(67,56,202,.07),0 1px 3px rgba(67,56,202,.05)">
-                <div style="margin-bottom:10px"><svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="#6366f1" stroke-width="1.5" stroke-linecap="round"><rect x="5" y="3" width="12" height="16" rx="2"/><line x1="8" y1="8" x2="14" y2="8"/><line x1="8" y1="12" x2="14" y2="12"/><line x1="8" y1="16" x2="11" y2="16"/></svg></div>
+              <div style="flex:1;background:#d6e0ef;border:1px solid rgba(16,24,40,.18);border-radius:var(--r);padding:22px;box-shadow:0 4px 6px rgba(16,24,40,.07),0 1px 3px rgba(16,24,40,.05)">
+                <div style="margin-bottom:10px"><svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="#2c4a6e" stroke-width="1.5" stroke-linecap="round"><rect x="5" y="3" width="12" height="16" rx="2"/><line x1="8" y1="8" x2="14" y2="8"/><line x1="8" y1="12" x2="14" y2="12"/><line x1="8" y1="16" x2="11" y2="16"/></svg></div>
                 <h4 style="color:#1e1b4b;margin-bottom:8px">Auto-Generated Meeting Summaries</h4>
                 <p style="color:#4b5563;font-size:.84rem;margin-bottom:14px">Granola generates this after every customer call. CSM reviews in 2 min instead of writing for 15.</p>
-                <div style="background:#fff;border-radius:8px;padding:14px;border:1px solid rgba(99,102,241,.15);font-size:.78rem;color:#4b5563;line-height:1.7">
-                  <div style="color:#4338ca;font-weight:700;margin-bottom:8px">Call Summary — Orbit Tech QBR — April 14</div>
+                <div style="background:#fff;border-radius:8px;padding:14px;border:1px solid rgba(16,24,40,.13);font-size:.78rem;color:#4b5563;line-height:1.7">
+                  <div style="color:#1a3a5c;font-weight:700;margin-bottom:8px">Call Summary — Orbit Tech QBR — April 14</div>
                   <strong style="color:#1e1b4b">Key outcomes:</strong> Renewed for 2 years (+15% ARR). Expansion to 3 new teams agreed in principle.<br>
                   <strong style="color:#1e1b4b">Risks flagged:</strong> VP of Ops skeptical of ROI — wants case study by May 1.<br>
                   <strong style="color:#1e1b4b">Action items:</strong> CSM to send ROI report by Friday. Customer to intro CSM to IT team.<br>
                   <strong style="color:#1e1b4b">Sentiment:</strong> Positive. Champion highly engaged. Exec lukewarm.
                 </div>
               </div>
-              <div style="flex:1;background:#dde4ff;border:1px solid rgba(99,102,241,.2);border-radius:var(--r);padding:22px;box-shadow:0 4px 6px rgba(67,56,202,.07),0 1px 3px rgba(67,56,202,.05)">
-                <div style="margin-bottom:10px"><svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="#6366f1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="3"/><path d="M2.5 11c2.2-4.5 4.8-6.5 8.5-6.5s6.3 2 8.5 6.5c-2.2 4.5-4.8 6.5-8.5 6.5s-6.3-2-8.5-6.5z"/></svg></div>
+              <div style="flex:1;background:#d6e0ef;border:1px solid rgba(16,24,40,.18);border-radius:var(--r);padding:22px;box-shadow:0 4px 6px rgba(16,24,40,.07),0 1px 3px rgba(16,24,40,.05)">
+                <div style="margin-bottom:10px"><svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="#2c4a6e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="3"/><path d="M2.5 11c2.2-4.5 4.8-6.5 8.5-6.5s6.3 2 8.5 6.5c-2.2 4.5-4.8 6.5-8.5 6.5s-6.3-2-8.5-6.5z"/></svg></div>
                 <h4 style="color:#1e1b4b;margin-bottom:8px">Churn Prediction Model</h4>
                 <p style="color:#4b5563;font-size:.84rem;margin-bottom:14px">ML model scores every account weekly. CSM gets a prioritized list of accounts that need attention — not just the ones who email.</p>
                 <div style="display:flex;flex-direction:column;gap:7px">
-                  <div style="background:#fff;border-radius:6px;padding:10px 12px;border:1px solid rgba(99,102,241,.15);display:flex;justify-content:space-between;align-items:center">
-                    <div><div style="color:#1e1b4b;font-size:.82rem;font-weight:600">Apex Systems</div><div style="color:#6b7280;font-size:.72rem">No login in 18 days. Tickets up 40%.</div></div>
+                  <div style="background:#fff;border-radius:6px;padding:10px 12px;border:1px solid rgba(16,24,40,.13);display:flex;justify-content:space-between;align-items:center">
+                    <div><div style="color:#1e1b4b;font-size:.82rem;font-weight:600">ABC Corp</div><div style="color:#6b7280;font-size:.72rem">No login in 18 days. Tickets up 40%.</div></div>
                     <span style="background:#FFF1F2;color:#F43F5E;padding:3px 9px;border-radius:100px;font-size:.72rem;font-weight:700">High Risk</span>
                   </div>
-                  <div style="background:#fff;border-radius:6px;padding:10px 12px;border:1px solid rgba(99,102,241,.15);display:flex;justify-content:space-between;align-items:center">
-                    <div><div style="color:#1e1b4b;font-size:.82rem;font-weight:600">Prism Analytics</div><div style="color:#6b7280;font-size:.72rem">Champion left company. No replacement.</div></div>
+                  <div style="background:#fff;border-radius:6px;padding:10px 12px;border:1px solid rgba(16,24,40,.13);display:flex;justify-content:space-between;align-items:center">
+                    <div><div style="color:#1e1b4b;font-size:.82rem;font-weight:600">Global Corp</div><div style="color:#6b7280;font-size:.72rem">Champion left company. No replacement.</div></div>
                     <span style="background:#FEF3C7;color:#92400E;padding:3px 9px;border-radius:100px;font-size:.72rem;font-weight:700">Watch</span>
                   </div>
-                  <div style="background:#fff;border-radius:6px;padding:10px 12px;border:1px solid rgba(99,102,241,.15);display:flex;justify-content:space-between;align-items:center">
+                  <div style="background:#fff;border-radius:6px;padding:10px 12px;border:1px solid rgba(16,24,40,.13);display:flex;justify-content:space-between;align-items:center">
                     <div><div style="color:#1e1b4b;font-size:.82rem;font-weight:600">Summit Corp</div><div style="color:#6b7280;font-size:.72rem">Usage up 34%. 3 new power users.</div></div>
                     <span style="background:#D1FAE5;color:#065F46;padding:3px 9px;border-radius:100px;font-size:.72rem;font-weight:700">Expand</span>
                   </div>
@@ -795,28 +795,28 @@ input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.2)}
             </div>
             <!-- Slide 2 -->
             <div style="min-width:100%;display:flex;gap:16px">
-              <div style="flex:1;background:#dde4ff;border:1px solid rgba(99,102,241,.2);border-radius:var(--r);padding:22px;box-shadow:0 4px 6px rgba(67,56,202,.07),0 1px 3px rgba(67,56,202,.05)">
-                <div style="margin-bottom:10px"><svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="#6366f1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="16" height="12" rx="2"/><polyline points="3,6 11,13 19,6"/></svg></div>
+              <div style="flex:1;background:#d6e0ef;border:1px solid rgba(16,24,40,.18);border-radius:var(--r);padding:22px;box-shadow:0 4px 6px rgba(16,24,40,.07),0 1px 3px rgba(16,24,40,.05)">
+                <div style="margin-bottom:10px"><svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="#2c4a6e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="16" height="12" rx="2"/><polyline points="3,6 11,13 19,6"/></svg></div>
                 <h4 style="color:#1e1b4b;margin-bottom:8px">Auto-Drafted Emails</h4>
                 <p style="color:#4b5563;font-size:.84rem;margin-bottom:14px">CRM health data + account history → AI drafts the recommended email. CSM edits in 90 seconds.</p>
-                <div style="background:#fff;border-radius:8px;padding:14px;border:1px solid rgba(99,102,241,.15);font-size:.78rem;color:#4b5563;line-height:1.7">
-                  <div style="color:#4338ca;font-weight:700;margin-bottom:6px">AI Draft — Renewal outreach for Atlas Corp (Green account)</div>
+                <div style="background:#fff;border-radius:8px;padding:14px;border:1px solid rgba(16,24,40,.13);font-size:.78rem;color:#4b5563;line-height:1.7">
+                  <div style="color:#1a3a5c;font-weight:700;margin-bottom:6px">AI Draft — Renewal outreach for Atlas Corp (Green account)</div>
                   Subject: Your renewal — and an expansion opportunity<br><br>
-                  Hi Sarah — renewal is in 60 days. Year one: 847 logins, 12,400 records processed, 320 hours saved.<br><br>
-                  Three other Atlas teams have been asking about access. Worth a quick call?
+                  Hi Sarah — Renewal is in 60 days. Year one was a success with: 847 logins, 12,400 records processed, 320 hours saved.<br><br>
+                  Three teams have been asking about access. Do you have time for a quick call?
                 </div>
               </div>
-              <div style="flex:1;background:#dde4ff;border:1px solid rgba(99,102,241,.2);border-radius:var(--r);padding:22px;box-shadow:0 4px 6px rgba(67,56,202,.07),0 1px 3px rgba(67,56,202,.05)">
-                <div style="margin-bottom:10px"><svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="#6366f1" stroke-width="1.5" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><circle cx="11" cy="11" r="4"/><circle cx="11" cy="11" r="1.5" fill="#6366f1" stroke="none"/></svg></div>
+              <div style="flex:1;background:#d6e0ef;border:1px solid rgba(16,24,40,.18);border-radius:var(--r);padding:22px;box-shadow:0 4px 6px rgba(16,24,40,.07),0 1px 3px rgba(16,24,40,.05)">
+                <div style="margin-bottom:10px"><svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="#2c4a6e" stroke-width="1.5" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><circle cx="11" cy="11" r="4"/><circle cx="11" cy="11" r="1.5" fill="#2c4a6e" stroke="none"/></svg></div>
                 <h4 style="color:#1e1b4b;margin-bottom:8px">Suggested Next Actions in CRM</h4>
                 <p style="color:#4b5563;font-size:.84rem;margin-bottom:14px">After every touchpoint, AI recommends the next action based on account activity — no more blank CRM fields.</p>
                 <div style="display:flex;flex-direction:column;gap:7px">
-                  <div style="background:#fff;border-radius:6px;padding:10px 12px;border:1px solid rgba(99,102,241,.15)">
-                    <div style="color:#4338ca;font-size:.72rem;font-weight:700;margin-bottom:3px">SUGGESTED ACTION</div>
+                  <div style="background:#fff;border-radius:6px;padding:10px 12px;border:1px solid rgba(16,24,40,.13)">
+                    <div style="color:#1a3a5c;font-size:.72rem;font-weight:700;margin-bottom:3px">SUGGESTED ACTION</div>
                     <div style="color:#1e1b4b;font-size:.82rem">Send Orbit Tech ROI summary — they mentioned CFO review in 2 weeks. Deadline: Friday.</div>
                   </div>
-                  <div style="background:#fff;border-radius:6px;padding:10px 12px;border:1px solid rgba(99,102,241,.15)">
-                    <div style="color:#4338ca;font-size:.72rem;font-weight:700;margin-bottom:3px">RISK ALERT</div>
+                  <div style="background:#fff;border-radius:6px;padding:10px 12px;border:1px solid rgba(16,24,40,.13)">
+                    <div style="color:#1a3a5c;font-size:.72rem;font-weight:700;margin-bottom:3px">RISK ALERT</div>
                     <div style="color:#1e1b4b;font-size:.82rem">Delta Co has not logged in for 11 days. Their renewal is in 47 days. Call this week.</div>
                   </div>
                 </div>
@@ -825,9 +825,9 @@ input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.2)}
           </div>
         </div>
         <!-- Left arrow -->
-        <button onclick="aitoolsNav(-1)" style="position:absolute;left:-18px;top:50%;transform:translateY(-50%);background:#dde4ff;border:1px solid rgba(99,102,241,.2);border-radius:50%;width:36px;height:36px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1.2rem;color:#4338ca;transition:background .2s;z-index:10;box-shadow:0 2px 6px rgba(67,56,202,.12)" onmouseover="this.style.background='#c7d2fe'" onmouseout="this.style.background='#dde4ff'">‹</button>
+        <button onclick="aitoolsNav(-1)" style="position:absolute;left:-18px;top:50%;transform:translateY(-50%);background:#d6e0ef;border:1px solid rgba(16,24,40,.18);border-radius:50%;width:36px;height:36px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1.2rem;color:#1a3a5c;transition:background .2s;z-index:10;box-shadow:0 2px 6px rgba(16,24,40,.10)" onmouseover="this.style.background='#b8ccde'" onmouseout="this.style.background='#d6e0ef'">‹</button>
         <!-- Right arrow -->
-        <button onclick="aitoolsNav(1)" style="position:absolute;right:-18px;top:50%;transform:translateY(-50%);background:#dde4ff;border:1px solid rgba(99,102,241,.2);border-radius:50%;width:36px;height:36px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1.2rem;color:#4338ca;transition:background .2s;z-index:10;box-shadow:0 2px 6px rgba(67,56,202,.12)" onmouseover="this.style.background='#c7d2fe'" onmouseout="this.style.background='#dde4ff'">›</button>
+        <button onclick="aitoolsNav(1)" style="position:absolute;right:-18px;top:50%;transform:translateY(-50%);background:#d6e0ef;border:1px solid rgba(16,24,40,.18);border-radius:50%;width:36px;height:36px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1.2rem;color:#1a3a5c;transition:background .2s;z-index:10;box-shadow:0 2px 6px rgba(16,24,40,.10)" onmouseover="this.style.background='#b8ccde'" onmouseout="this.style.background='#d6e0ef'">›</button>
         <!-- Dots -->
         <div style="display:flex;align-items:center;justify-content:center;margin-top:14px">
           <div id="aitools-dots" style="display:flex;gap:8px"></div>
@@ -835,7 +835,7 @@ input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.2)}
       </div>
     </div>
 
-    <div class="key-takeaway reveal" style="background:rgba(67,56,202,.06);border-color:rgba(67,56,202,.15);border-left-color:#4338ca"><div class="kt-body"><h4 style="color:#4338ca">Key Takeaway</h4><p style="color:#4b5563">AI does not replace CSM judgment — it removes the 40% of a CSM's time spent on information gathering, note-taking, and drafting. The best CSMs in 2026 are the ones who have figured out how to deploy AI tools and spend their saved time on the conversations that actually move the needle.</p></div></div>
+    <div class="key-takeaway reveal" style="background:rgba(16,24,40,.06);border-color:rgba(16,24,40,.13);border-left-color:#1a3a5c"><div class="kt-body"><h4 style="color:#1a3a5c">Key Takeaway</h4><p style="color:#4b5563">AI does not replace CSM judgment — it removes the 40% of a CSM's time spent on information gathering, note-taking, and drafting. The best CSMs in 2026 are the ones who have figured out how to deploy AI tools and spend their saved time on the conversations that actually move the needle.</p></div></div>
   </div>
 </section>
 
@@ -850,10 +850,10 @@ input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.2)}
       <div>
         <div style="font-weight:700;font-size:.84rem;color:#fff;text-transform:uppercase;letter-spacing:.08em;margin-bottom:14px">Customer Success Stages</div>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px 16px">
-          <a href="#foundation" style="color:#fff;font-size:.84rem;text-decoration:none;transition:color .2s" onmouseover="this.style.color='#a5b4fc'" onmouseout="this.style.color='#fff'">Foundation</a>
-          <a href="#current" style="color:#fff;font-size:.84rem;text-decoration:none;transition:color .2s" onmouseover="this.style.color='#a5b4fc'" onmouseout="this.style.color='#fff'">Startup Phase</a>
-          <a href="#transition" style="color:#fff;font-size:.84rem;text-decoration:none;transition:color .2s" onmouseover="this.style.color='#a5b4fc'" onmouseout="this.style.color='#fff'">Scaling Up</a>
-          <a href="#ai-future" style="color:#fff;font-size:.84rem;text-decoration:none;transition:color .2s" onmouseover="this.style.color='#a5b4fc'" onmouseout="this.style.color='#fff'">AI Future</a>
+          <a href="#foundation" style="color:#fff;font-size:.84rem;text-decoration:none;transition:color .2s" onmouseover="this.style.color='#7a9abb'" onmouseout="this.style.color='#fff'">Foundation</a>
+          <a href="#current" style="color:#fff;font-size:.84rem;text-decoration:none;transition:color .2s" onmouseover="this.style.color='#7a9abb'" onmouseout="this.style.color='#fff'">Startup Phase</a>
+          <a href="#transition" style="color:#fff;font-size:.84rem;text-decoration:none;transition:color .2s" onmouseover="this.style.color='#7a9abb'" onmouseout="this.style.color='#fff'">Scaling Up</a>
+          <a href="#ai-future" style="color:#fff;font-size:.84rem;text-decoration:none;transition:color .2s" onmouseover="this.style.color='#7a9abb'" onmouseout="this.style.color='#fff'">AI Future</a>
         </div>
       </div>
     </div>
@@ -1034,7 +1034,7 @@ var aitoolsTotal = 2;
   if (!dotsEl) return;
   for (var i = 0; i < aitoolsTotal; i++) {
     var d = document.createElement('button');
-    d.style.cssText = 'width:' + (i === 0 ? '18px' : '7px') + ';height:7px;border-radius:' + (i === 0 ? '4px' : '50%') + ';border:none;cursor:pointer;padding:0;transition:all .2s;background:' + (i === 0 ? '#4338ca' : '#c7d2fe');
+    d.style.cssText = 'width:' + (i === 0 ? '18px' : '7px') + ';height:7px;border-radius:' + (i === 0 ? '4px' : '50%') + ';border:none;cursor:pointer;padding:0;transition:all .2s;background:' + (i === 0 ? '#1a3a5c' : '#b8ccde');
     d.onclick = (function(idx){ return function(){ aitoolsGo(idx); }; })(i);
     dotsEl.appendChild(d);
   }
@@ -1043,7 +1043,7 @@ function aitoolsGo(idx) {
   aitoolsIdx = (idx + aitoolsTotal) % aitoolsTotal;
   document.getElementById('aitools-slides').style.transform = 'translateX(-' + (aitoolsIdx * 100) + '%)';
   document.querySelectorAll('#aitools-dots button').forEach(function(d, i) {
-    d.style.background = i === aitoolsIdx ? '#4338ca' : '#c7d2fe';
+    d.style.background = i === aitoolsIdx ? '#1a3a5c' : '#b8ccde';
     d.style.width = i === aitoolsIdx ? '18px' : '7px';
     d.style.borderRadius = i === aitoolsIdx ? '4px' : '50%';
   });
@@ -1091,7 +1091,7 @@ function calcHealth() {
     status.style.color = '#10B981';
     actions.innerHTML  =
       '<div class="action-item" style="background:#D1FAE5"><div class="action-dot" style="background:#10B981"></div><span style="font-size:.78rem;color:#065F46">Send proactive value check-in within 2 weeks</span></div>' +
-      '<div class="action-item" style="background:#D1FAE5"><div class="action-dot" style="background:#10B981"></div><span style="font-size:.78rem;color:#065F46">Identify expansion opportunity — review usage for upsell signals</span></div>' +
+      '<div class="action-item" style="background:#D1FAE5"><div class="action-dot" style="background:#10B981"></div><span style="font-size:.78rem;color:#065F46">Identify expansion opportunity — review usage for upsell</span></div>' +
       '<div class="action-item" style="background:#D1FAE5"><div class="action-dot" style="background:#10B981"></div><span style="font-size:.78rem;color:#065F46">Ask for NPS response or referral if relationship is strong</span></div>';
   } else if (score >= 40) {
     circle.style.borderColor = '#F59E0B';
@@ -1111,7 +1111,7 @@ function calcHealth() {
     status.style.color = '#F43F5E';
     actions.innerHTML  =
       '<div class="action-item" style="background:#FFF1F2"><div class="action-dot" style="background:#F43F5E"></div><span style="font-size:.78rem;color:#9F1239">Immediate outreach — phone call today, not tomorrow</span></div>' +
-      '<div class="action-item" style="background:#FFF1F2"><div class="action-dot" style="background:#F43F5E"></div><span style="font-size:.78rem;color:#9F1239">Escalate to CS Lead + exec-to-exec if no response in 48h</span></div>' +
+      '<div class="action-item" style="background:#FFF1F2"><div class="action-dot" style="background:#F43F5E"></div><span style="font-size:.78rem;color:#9F1239">Escalate to leadership if no response in 48h</span></div>' +
       '<div class="action-item" style="background:#FFF1F2"><div class="action-dot" style="background:#F43F5E"></div><span style="font-size:.78rem;color:#9F1239">Start churn save playbook — do not lead with renewal</span></div>';
   }
 }
